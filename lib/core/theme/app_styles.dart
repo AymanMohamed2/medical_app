@@ -66,6 +66,13 @@ abstract class AppStyles {
         fontFamily: AppFonts.inter);
   }
 
+  static TextStyle semiBold19(BuildContext context) {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: 19),
+        fontWeight: FontWeight.w600,
+        fontFamily: AppFonts.inter);
+  }
+
   static TextStyle bold17(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 17),
@@ -97,7 +104,7 @@ abstract class AppStyles {
   static TextStyle bold25(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 25),
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w800,
         fontFamily: AppFonts.nunito);
   }
 
@@ -108,10 +115,17 @@ abstract class AppStyles {
         fontFamily: AppFonts.inter);
   }
 
+  static TextStyle regular25(BuildContext context) {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: 25),
+        fontWeight: FontWeight.w500,
+        fontFamily: AppFonts.inter);
+  }
+
   static TextStyle medium15(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 15),
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w800,
         fontFamily: AppFonts.inter);
   }
 
@@ -132,7 +146,7 @@ abstract class AppStyles {
   static TextStyle bold12(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 12),
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w900,
         fontFamily: AppFonts.nunito);
   }
 
@@ -181,7 +195,7 @@ abstract class AppStyles {
   static TextStyle bold13(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 13),
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w900,
         fontFamily: AppFonts.nunito);
   }
 

@@ -20,6 +20,8 @@ class PatientLoginViewBody extends StatelessWidget {
             AppLogoSection(),
             SizedBox(height: 50),
             UserDataSection(
+              title: AppStrings.loginAccount,
+              onPressed: () {},
               isVisible: false,
             ),
             SizedBox(height: 60),

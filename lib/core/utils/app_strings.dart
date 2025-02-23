@@ -7,10 +7,24 @@ abstract class AppStrings {
   static const String orLoginWith = '-or login with-';
   static const String orSignUpWith = '-or Sign up with-';
   static const String loginAccount = 'Login to your account';
+  static const String createAccount = 'Create your account';
   static const String enterEmail = 'Enter your E-mail';
+  static const String enterName = 'Enter your Name';
   static const String enterPass = 'Enter your password';
   static const String passConfirm = 'confirm your password';
   static const String medicalCondition = 'Type your medical condition';
   static const String login = 'Login';
   static const String signUp = 'Sign up';
+  static const String home = 'home';
+  static const String search = 'search';
+  static const String alerts = 'alerts';
+  static const String profile = 'profile';
+  static const String hi = 'Hi, ';
+  static const String seemsFine = 'Everything seems fine';
+  static const String heartPulsesUnit = 'bpm';
+  static const String tempUnit = '°C';
+  static const String oxygenUnit = '%';
+  static const String consult = 'Consult now';
+  static const String popDoctors = 'Popular doctors';
+  static const String ecgRead = 'Tap to read ECG';
 }

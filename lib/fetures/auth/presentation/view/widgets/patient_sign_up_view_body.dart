@@ -3,6 +3,7 @@ import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/fetures/auth/presentation/view/widgets/app_logo_section.dart';
 import 'package:medical_app/fetures/auth/presentation/view/widgets/or_with_section.dart';
 import 'package:medical_app/fetures/auth/presentation/view/widgets/user_data_section.dart';
+import 'package:medical_app/fetures/home/presentation/view/bottom_nav_bar_view.dart';
 
 class PatientSignUpViewBody extends StatelessWidget {
   const PatientSignUpViewBody({super.key});
@@ -17,6 +18,15 @@ class PatientSignUpViewBody extends StatelessWidget {
             AppLogoSection(),
             SizedBox(height: 40),
             UserDataSection(
+              title: AppStrings.createAccount,
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const BottomNavBarView(),
+                  ),
+                );
+              },
               isVisible: true,
             ),
             SizedBox(height: 60),

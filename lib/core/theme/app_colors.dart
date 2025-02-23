@@ -13,6 +13,7 @@ abstract class AppColors {
   static const Color lightSemon = Color(0xFFF9C496);
   static const Color lightPink = Color(0xFFEFB1CD);
   static const Color lightGreen = Color(0xFFA0BD9A);
+  static const Color darkGray = Color(0xFF615C5C);
   static const Color black = Colors.black;
   static const Color white = Colors.white;
 }

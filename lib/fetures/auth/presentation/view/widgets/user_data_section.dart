@@ -6,8 +6,15 @@ import 'package:medical_app/core/widgets/custom_button.dart';
 import 'package:medical_app/core/widgets/custom_text_form_field.dart';
 
 class UserDataSection extends StatelessWidget {
-  const UserDataSection({super.key, required this.isVisible});
+  const UserDataSection({
+    super.key,
+    required this.isVisible,
+    required this.onPressed,
+    required this.title,
+  });
   final bool isVisible;
+  final Function()? onPressed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +22,12 @@ class UserDataSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(AppStrings.loginAccount, style: AppStyles.bold20(context)),
+        Text(title, style: AppStyles.bold20(context)),
         SizedBox(height: 15),
+        CustomTextField(
+          hintText: AppStrings.enterName,
+        ),
+        SizedBox(height: 20),
         CustomTextField(
           hintText: AppStrings.enterEmail,
         ),
@@ -75,9 +86,9 @@ class UserDataSection extends StatelessWidget {
         ),
         SizedBox(height: 20),
         CustomButton(
-          text: AppStrings.login,
+          text: isVisible ? AppStrings.signUp : AppStrings.login,
           textStyle: AppStyles.medium24(context).copyWith(color: Colors.white),
-          onPressed: () {},
+          onPressed: onPressed,
         ),
       ],
     );
