@@ -30,9 +30,9 @@ abstract class AppStyles {
     );
   }
 
-  static TextStyle medium24(BuildContext context) {
+  static TextStyle medium21(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveFontSize(context, fontSize: 24),
+      fontSize: getResponsiveFontSize(context, fontSize: 21),
       fontWeight: FontWeight.w500,
     );
   }
@@ -79,6 +79,13 @@ abstract class AppStyles {
     );
   }
 
+  static TextStyle bold35(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 35),
+      fontWeight: FontWeight.w700,
+    );
+  }
+
   static TextStyle bold32(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveFontSize(context, fontSize: 32),
@@ -100,9 +107,9 @@ abstract class AppStyles {
     );
   }
 
-  static TextStyle bold36(BuildContext context) {
+  static TextStyle bold30(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveFontSize(context, fontSize: 36),
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
       fontWeight: FontWeight.w700,
     );
   }
