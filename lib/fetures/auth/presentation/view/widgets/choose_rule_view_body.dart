@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/utils/assets.dart';
-import 'package:medical_app/fetures/auth/presentation/view/patient_login_view.dart';
+import 'package:medical_app/fetures/auth/presentation/view/patient_sign_up_view.dart';
 
 class ChooseRuleViewBody extends StatelessWidget {
   const ChooseRuleViewBody({super.key});
@@ -19,7 +19,7 @@ class ChooseRuleViewBody extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const PatientLoginView(),
+                  builder: (BuildContext context) => const PatientSignUpView(),
                 ),
               );
             },
