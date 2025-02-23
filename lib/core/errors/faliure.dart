@@ -1,4 +1,4 @@
-import 'package:medical_app/core/lottie_assets.dart';
+import 'package:medical_app/core/utils/lottie_assets.dart';
 
 abstract class Failure {
   final String errMessage;

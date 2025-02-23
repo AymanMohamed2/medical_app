@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/fetures/home/presentation/view/widgets/custom_doctor_card.dart';
 
-class PopDoctorsGridView extends StatelessWidget {
-  const PopDoctorsGridView({super.key});
+class DoctorsGridView extends StatelessWidget {
+  const DoctorsGridView({super.key});
 
   @override
   Widget build(BuildContext context) {

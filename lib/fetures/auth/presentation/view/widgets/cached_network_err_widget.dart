@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medical_app/core/lottie_assets.dart';
+import 'package:medical_app/core/utils/lottie_assets.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 
 class CachedNetworkErrorWidget extends StatelessWidget {

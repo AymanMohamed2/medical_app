@@ -3,7 +3,7 @@ import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/fetures/home/presentation/view/widgets/ecg_readings.dart';
-import 'package:medical_app/fetures/home/presentation/view/widgets/pop_doctors_grid_view.dart';
+import 'package:medical_app/fetures/auth/presentation/view/widgets/doctors_grid_view.dart';
 import 'package:medical_app/fetures/home/presentation/view/widgets/vital_signs_section.dart';
 import 'package:medical_app/fetures/home/presentation/view/widgets/welcome_section.dart';
 
@@ -35,7 +35,7 @@ class HomeViewBody extends StatelessWidget {
               ),
             ),
           ),
-          PopDoctorsGridView(),
+          DoctorsGridView(),
         ],
       ),
     );
