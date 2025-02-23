@@ -71,7 +71,7 @@ class PageviewItem extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 subtitle,
-                style: AppStyles.bold30(context)
+                style: AppStyles.bold36(context)
                     .copyWith(color: AppColors.primaryColor),
                 textAlign: TextAlign.left,
               ),

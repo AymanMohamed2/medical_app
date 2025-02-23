@@ -17,7 +17,7 @@ class SligdingText extends StatelessWidget {
           child: Text(
             textAlign: TextAlign.center,
             AppStrings.appName,
-            style: AppStyles.bold35(context).copyWith(color: Colors.white),
+            style: AppStyles.bold40(context).copyWith(color: Colors.white),
           ),
         );
       },
