@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
-import 'package:medical_app/core/widgets/custom_border.dart';
 import 'package:medical_app/core/widgets/custom_profile_image.dart';
 
 class DoctorAlertMessage extends StatelessWidget {
@@ -32,13 +31,9 @@ class DoctorAlertMessage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 17),
-            child: CustomBorder(
-              radius: 27,
-              borderClolor: AppColors.primaryColor.withAlpha(90),
-              padding: EdgeInsets.zero,
-              child: CustomProfileImage(
-                imageUrl: imageUrl,
-              ),
+            child: CustomProfileImage(
+              radius: 25,
+              imageUrl: imageUrl,
             ),
           ),
           Expanded(

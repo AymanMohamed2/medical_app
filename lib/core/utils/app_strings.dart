@@ -28,5 +28,10 @@ abstract class AppStrings {
   static const String popDoctors = 'Popular doctors';
   static const String ecgRead = 'Tap to read ECG';
   static const String appBarAlerts = 'Alerts';
-  static const String appBarProfile = 'Profile';
+  static const String appBarProfile = 'Medical profile';
+  static const String vitals = 'Vitals';
+  static const String name = 'Name: ';
+  static const String age = 'Age: ';
+  static const String state = 'State: ';
+  static const String medicalRecord = 'Medical Record: ';
 }
