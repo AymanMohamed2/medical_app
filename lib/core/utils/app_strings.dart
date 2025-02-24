@@ -21,6 +21,8 @@ abstract class AppStrings {
   static const String alerts = 'alerts';
   static const String profile = 'profile';
   static const String hi = 'Hi, ';
+  static const String hiDr = 'Hi, Dr.';
+  static const String looksLike = 'looks like you got some reservations today';
   static const String seemsFine = 'Everything seems fine';
   static const String heartPulsesUnit = 'bpm';
   static const String tempUnit = '°C';
@@ -29,7 +31,7 @@ abstract class AppStrings {
   static const String popDoctors = 'Popular doctors';
   static const String ecgRead = 'Tap to read ECG';
   static const String appBarAlerts = 'Alerts';
-  static const String appBarProfile = 'Medical profile';
+  static const String appBarProfile = 'Your profile';
   static const String vitals = 'Vitals';
   static const String name = 'Name: ';
   static const String age = 'Age: ';
@@ -38,4 +40,5 @@ abstract class AppStrings {
   static const String medicalRecord = 'Medical Record: ';
   static const String upload = 'Upload your medical license';
   static const String previousSessions = 'Previous sessions';
+  static const String todayReservations = 'Today’s reservations';
 }

@@ -20,7 +20,8 @@ class DoctorProfileViewBody extends StatelessWidget {
         SliverToBoxAdapter(child: SizedBox(height: 27)),
         SliverToBoxAdapter(
           child: IamgeNameGmailSection(
-            imageUrl: 'https://i.pravatar.cc/300',
+            imageUrl:
+                'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
             name: 'Dr. John Doe',
             gmail: 'JohnDoe6o@gmail.com',
           ),
@@ -41,7 +42,9 @@ class DoctorProfileViewBody extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 15)),
-        PreviousSessionsListView(),
+        PreviousSessionsListView(
+          isHome: false,
+        ),
       ],
     );
   }
