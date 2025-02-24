@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medical_app/fetures/profile/presentation/view/widgets/profile_view_body.dart';
+import 'package:medical_app/fetures/patient_profile/presentation/view/widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});

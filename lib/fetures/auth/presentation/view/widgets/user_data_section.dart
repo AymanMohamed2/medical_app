@@ -4,6 +4,7 @@ import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_button.dart';
 import 'package:medical_app/core/widgets/custom_text_form_field.dart';
+import 'package:medical_app/fetures/auth/presentation/view/widgets/upload_license_widget.dart';
 
 class UserDataSection extends StatelessWidget {
   const UserDataSection({
@@ -11,8 +12,11 @@ class UserDataSection extends StatelessWidget {
     required this.isVisible,
     required this.onPressed,
     required this.title,
+    required this.isDoctor,
   });
   final bool isVisible;
+  final bool isDoctor;
+
   final Function()? onPressed;
   final String title;
 
@@ -32,6 +36,17 @@ class UserDataSection extends StatelessWidget {
           hintText: AppStrings.enterEmail,
         ),
         SizedBox(height: 20),
+        Visibility(
+          visible: isDoctor,
+          child: Column(
+            children: [
+              CustomTextField(
+                hintText: AppStrings.hospital,
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        ),
         StatefulBuilder(
           builder: (context, setState) => CustomTextField(
             obscureText: isActive,
@@ -78,12 +93,16 @@ class UserDataSection extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              CustomTextField(
-                hintText: AppStrings.medicalCondition,
+              Visibility(
+                visible: !isDoctor,
+                child: CustomTextField(
+                  hintText: AppStrings.medicalCondition,
+                ),
               ),
             ],
           ),
         ),
+        Visibility(visible: isDoctor, child: UploadLicenseWidget()),
         SizedBox(height: 20),
         CustomButton(
           text: isVisible ? AppStrings.signUp : AppStrings.login,

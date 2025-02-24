@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
-import 'package:medical_app/fetures/home/presentation/view/widgets/custom_vital_container.dart';
+import 'package:medical_app/fetures/patient_home/presentation/view/widgets/custom_vital_container.dart';
 
 class VitalSignsSection extends StatelessWidget {
   const VitalSignsSection({super.key});

@@ -5,7 +5,7 @@ import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_border.dart';
 import 'package:medical_app/core/widgets/custom_button.dart';
 import 'package:medical_app/fetures/auth/presentation/view/widgets/custom_cached_network_image.dart';
-import 'package:medical_app/fetures/home/presentation/view/widgets/doctor_info_section.dart';
+import 'package:medical_app/fetures/patient_home/presentation/view/widgets/doctor_info_section.dart';
 
 class CustomDoctorCard extends StatelessWidget {
   const CustomDoctorCard({super.key});

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/fetures/auth/presentation/view/widgets/app_logo_section.dart';
-import 'package:medical_app/fetures/auth/presentation/view/widgets/or_with_section.dart';
 import 'package:medical_app/fetures/auth/presentation/view/widgets/user_data_section.dart';
-import 'package:medical_app/fetures/patient_home/presentation/view/patient_bottom_nav_bar_view.dart';
+import 'package:medical_app/fetures/doctor_home/presentation/view/doctor_bottom_nav_bar_view.dart';
 
-class PatientSignUpViewBody extends StatelessWidget {
-  const PatientSignUpViewBody({super.key});
+class DoctorSignUpViewBody extends StatelessWidget {
+  const DoctorSignUpViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +19,16 @@ class PatientSignUpViewBody extends StatelessWidget {
             UserDataSection(
               title: AppStrings.createAccount,
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute<void>(
                     builder: (BuildContext context) =>
-                        const PatientBottomNavBarView(),
+                        const DoctorBottomNavBarView(),
                   ),
                 );
               },
               isVisible: true,
-              isDoctor: false,
-            ),
-            SizedBox(height: 60),
-            OrWithSection(
-              title: AppStrings.orSignUpWith,
+              isDoctor: true,
             ),
             SizedBox(height: 50),
           ],

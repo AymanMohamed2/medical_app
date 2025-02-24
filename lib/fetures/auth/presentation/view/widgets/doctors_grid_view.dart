@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medical_app/fetures/home/presentation/view/widgets/custom_doctor_card.dart';
+import 'package:medical_app/fetures/patient_home/presentation/view/widgets/custom_doctor_card.dart';
 
 class DoctorsGridView extends StatelessWidget {
   const DoctorsGridView({super.key});

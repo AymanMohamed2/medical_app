@@ -2,25 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
-import 'package:medical_app/fetures/alerts/presentation/views/alerts_view.dart';
-import 'package:medical_app/fetures/home/presentation/view/home_view.dart';
-import 'package:medical_app/fetures/profile/presentation/view/profile_view.dart';
-import 'package:medical_app/fetures/search/presentation/view/search_view.dart';
+import 'package:medical_app/fetures/doctor_home/presentation/view/doctor_home_view.dart';
+import 'package:medical_app/fetures/doctor_profile/presentation/view/doctor_profile_view.dart';
 
-class BottomNavBarView extends StatefulWidget {
-  const BottomNavBarView({super.key});
+class DoctorBottomNavBarView extends StatefulWidget {
+  const DoctorBottomNavBarView({super.key});
 
   @override
-  State<BottomNavBarView> createState() => _BottomNavBarViewState();
+  State<DoctorBottomNavBarView> createState() =>
+      _PatientBottomNavBarViewState();
 }
 
-class _BottomNavBarViewState extends State<BottomNavBarView> {
+class _PatientBottomNavBarViewState extends State<DoctorBottomNavBarView> {
   int _index = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeView(),
-    SearchView(),
-    AlertsView(),
-    ProfileView(),
+    DoctorHomeView(),
+    DoctorProfileView(),
   ];
 
   @override
@@ -40,15 +37,7 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
               icon: FaIcon(_index != 0 ? Icons.home_outlined : Icons.home),
               label: AppStrings.home),
           BottomNavigationBarItem(
-              icon: FaIcon(_index != 1 ? Icons.search : Icons.search),
-              label: AppStrings.search),
-          BottomNavigationBarItem(
-              icon: _index != 2
-                  ? Icon(Icons.notifications_outlined)
-                  : Icon(Icons.notifications),
-              label: AppStrings.alerts),
-          BottomNavigationBarItem(
-              icon: _index != 3
+              icon: _index != 1
                   ? Icon(Icons.person_outlined)
                   : Icon(Icons.person),
               label: AppStrings.profile),

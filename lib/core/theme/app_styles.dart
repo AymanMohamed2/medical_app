@@ -66,6 +66,13 @@ abstract class AppStyles {
         fontFamily: AppFonts.roboto);
   }
 
+  static TextStyle regularr14(BuildContext context) {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: 14),
+        fontWeight: FontWeight.w400,
+        fontFamily: AppFonts.roboto);
+  }
+
   static TextStyle semiBold20(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 20),

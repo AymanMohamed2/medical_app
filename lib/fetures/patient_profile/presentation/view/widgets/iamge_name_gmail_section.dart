@@ -3,7 +3,15 @@ import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/widgets/custom_profile_image.dart';
 
 class IamgeNameGmailSection extends StatelessWidget {
-  const IamgeNameGmailSection({super.key});
+  const IamgeNameGmailSection({
+    super.key,
+    required this.imageUrl,
+    required this.name,
+    required this.gmail,
+  });
+  final String imageUrl;
+  final String name;
+  final String gmail;
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +20,18 @@ class IamgeNameGmailSection extends StatelessWidget {
         SizedBox(width: 26),
         CustomProfileImage(
           radius: 55,
-          imageUrl: 'https://i.pravatar.cc/300',
+          imageUrl: imageUrl,
         ),
         SizedBox(width: 13),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Patient Name',
+              name,
               style: AppStyles.semiBold20(context),
             ),
             Text(
-              'Patient Gmail@gmail.com',
+              gmail,
               style: AppStyles.regular13(context),
             ),
           ],

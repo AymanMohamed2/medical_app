@@ -23,6 +23,7 @@ class PatientLoginViewBody extends StatelessWidget {
               title: AppStrings.loginAccount,
               onPressed: () {},
               isVisible: false,
+              isDoctor: false,
             ),
             SizedBox(height: 60),
             OrWithSection(

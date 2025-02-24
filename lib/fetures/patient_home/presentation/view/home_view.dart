@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medical_app/fetures/home/presentation/view/widgets/home_view_body.dart';
+import 'package:medical_app/fetures/patient_home/presentation/view/widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

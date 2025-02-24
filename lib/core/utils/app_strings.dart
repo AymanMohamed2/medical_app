@@ -11,6 +11,7 @@ abstract class AppStrings {
   static const String enterEmail = 'Enter your E-mail';
   static const String enterName = 'Enter your Name';
   static const String enterPass = 'Enter your password';
+  static const String hospital = 'Hospital or clinic';
   static const String passConfirm = 'confirm your password';
   static const String medicalCondition = 'Type your medical condition';
   static const String login = 'Login';
@@ -33,5 +34,8 @@ abstract class AppStrings {
   static const String name = 'Name: ';
   static const String age = 'Age: ';
   static const String state = 'State: ';
+  static const String field = 'Field: ';
   static const String medicalRecord = 'Medical Record: ';
+  static const String upload = 'Upload your medical license';
+  static const String previousSessions = 'Previous sessions';
 }

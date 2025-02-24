@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/utils/assets.dart';
+import 'package:medical_app/fetures/auth/presentation/view/doctor_sign_up_view.dart';
 import 'package:medical_app/fetures/auth/presentation/view/patient_sign_up_view.dart';
 
 class ChooseRuleViewBody extends StatelessWidget {
@@ -30,7 +31,15 @@ class ChooseRuleViewBody extends StatelessWidget {
           height: 60,
         ),
         GestureDetector(
-            onTap: () {}, child: SvgPicture.asset(Assets.imagesDoctor)),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const DoctorSignUpView(),
+                ),
+              );
+            },
+            child: SvgPicture.asset(Assets.imagesDoctor)),
         Text(AppStrings.doctor,
             textAlign: TextAlign.center, style: AppStyles.medium20(context)),
       ],
