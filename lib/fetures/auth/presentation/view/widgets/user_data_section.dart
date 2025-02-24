@@ -18,7 +18,7 @@ class UserDataSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isActive = false;
+    bool isActive = true;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

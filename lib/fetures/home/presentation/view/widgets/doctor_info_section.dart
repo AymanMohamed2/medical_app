@@ -15,10 +15,10 @@ class DoctorInfoSection extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              'Dr. aya mohamed ahmed',
-              style: AppStyles.semiBold16(context)),
+              'Dr. aya mohamed',
+              style: AppStyles.semiBold14(context)),
         ),
         Align(
           alignment: Alignment.centerLeft,

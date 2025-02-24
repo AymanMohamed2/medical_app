@@ -24,6 +24,13 @@ abstract class AppStyles {
         fontFamily: AppFonts.inter);
   }
 
+  static TextStyle semiBold14(BuildContext context) {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: 14),
+        fontWeight: FontWeight.w900,
+        fontFamily: AppFonts.inter);
+  }
+
   static TextStyle light16(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 16),
@@ -41,7 +48,7 @@ abstract class AppStyles {
   static TextStyle regular11(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 11),
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         fontFamily: AppFonts.inter);
   }
 

@@ -20,9 +20,9 @@ class CustomCashedNetworkImage extends StatelessWidget {
       fit: BoxFit.cover,
       placeholder: (context, url) => CustomFadingWidget(
         child: Container(
-          color: AppColors.textFieldBorderColor,
+          color: AppColors.searchFillGrayColor,
           child: AspectRatio(
-            aspectRatio: placeholderAspectRatio ?? 2.5 / 4,
+            aspectRatio: placeholderAspectRatio ?? 1,
           ),
         ),
       ),

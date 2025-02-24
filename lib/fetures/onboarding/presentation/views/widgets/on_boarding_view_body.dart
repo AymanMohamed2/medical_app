@@ -26,8 +26,9 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     pageController = PageController();
 
     pageController.addListener(() {
-      currentPage = pageController.page!.round();
-      setState(() {});
+      setState(() {
+        currentPage = pageController.page!.round();
+      });
     });
     super.initState();
   }
@@ -48,12 +49,11 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           ),
         ),
         DotsIndicator(
-          dotsCount: 2,
+          dotsCount: 3,
+          position: currentPage.toDouble(),
           decorator: DotsDecorator(
             activeColor: AppColors.primaryColor,
-            color: currentPage == 1
-                ? AppColors.primaryColor
-                : AppColors.primaryColor.withOpacity(.5),
+            color: AppColors.primaryColor.withAlpha(90),
           ),
         ),
         const SizedBox(
