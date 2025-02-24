@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/widgets/custom_patient_card.dart';
 
-class PreviousSessionsListView extends StatelessWidget {
-  const PreviousSessionsListView({super.key, required this.isHome});
+class PatientCardListView extends StatelessWidget {
+  const PatientCardListView({
+    super.key,
+    required this.isHome,
+    required this.isIconVisible,
+  });
   final bool isHome;
+  final bool isIconVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,9 @@ class PreviousSessionsListView extends StatelessWidget {
         itemCount: 20,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.only(bottom: 15),
-          child: const CustomPatientCard(),
+          child: CustomPatientCard(
+            isVisible: isIconVisible,
+          ),
         ),
       ),
     );

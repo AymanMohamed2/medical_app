@@ -4,7 +4,7 @@ import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_app_bar.dart';
 import 'package:medical_app/fetures/doctor_profile/presentation/view/widgets/doctor_profile_info_section.dart';
-import 'package:medical_app/fetures/doctor_profile/presentation/view/widgets/previous_sessions_list_view.dart';
+import 'package:medical_app/core/widgets/patient_card_list_view.dart';
 import 'package:medical_app/fetures/patient_profile/presentation/view/widgets/iamge_name_gmail_section.dart';
 
 class DoctorProfileViewBody extends StatelessWidget {
@@ -42,7 +42,8 @@ class DoctorProfileViewBody extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 15)),
-        PreviousSessionsListView(
+        PatientCardListView(
+          isIconVisible: false,
           isHome: false,
         ),
       ],

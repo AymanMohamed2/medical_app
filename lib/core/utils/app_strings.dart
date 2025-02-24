@@ -52,4 +52,5 @@ abstract class AppStrings {
   static const String schedule = 'Schedule';
   static const String generate = 'generate link';
   static const String meetingLing = 'Meeting link';
+  static const String ecgReading = '((ECG Readings))';
 }

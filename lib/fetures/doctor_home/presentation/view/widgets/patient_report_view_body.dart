@@ -5,10 +5,15 @@ import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_app_bar.dart';
 import 'package:medical_app/core/widgets/profile_user_info_section.dart';
 import 'package:medical_app/core/widgets/vital_signs_section.dart';
+import 'package:medical_app/fetures/doctor_home/presentation/view/widgets/ecg_taple_widget.dart';
 import 'package:medical_app/fetures/patient_profile/presentation/view/widgets/iamge_name_gmail_section.dart';
 
 class PatientReportViewBody extends StatelessWidget {
-  const PatientReportViewBody({super.key});
+  const PatientReportViewBody({
+    super.key,
+    required this.isVisible,
+  });
+  final bool isVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class PatientReportViewBody extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            isVisible: true,
+            isVisible: isVisible,
           ),
           SizedBox(height: 27),
           IamgeNameGmailSection(
@@ -39,7 +44,7 @@ class PatientReportViewBody extends StatelessWidget {
                 'Lorem ipsum dolor sit amet, consectetr adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit ametsapien fringilla, mattis ligula consecter,ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue.',
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 26, top: 16, bottom: 8),
+            padding: const EdgeInsets.only(left: 26, top: 20, bottom: 8),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -53,6 +58,9 @@ class PatientReportViewBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 26),
             child: VitalSignsSection(),
           ),
+          SizedBox(height: 15),
+          ECGTable(),
+          SizedBox(height: 15),
         ],
       ),
     );

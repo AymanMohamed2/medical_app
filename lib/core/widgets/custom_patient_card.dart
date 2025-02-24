@@ -7,7 +7,8 @@ import 'package:medical_app/fetures/auth/presentation/view/widgets/custom_cached
 import 'package:medical_app/fetures/doctor_home/presentation/view/patient_report_view.dart';
 
 class CustomPatientCard extends StatelessWidget {
-  const CustomPatientCard({super.key});
+  const CustomPatientCard({super.key, required this.isVisible});
+  final bool isVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,9 @@ class CustomPatientCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => const PatientReportView(),
+            builder: (BuildContext context) => PatientReportView(
+              isVisible: isVisible,
+            ),
           ),
         );
       },
