@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
+import 'package:medical_app/fetures/doctor_home/presentation/view/schedule_view.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key, required this.title, this.onPressed});
+  const CustomAppBar({
+    super.key,
+    required this.title,
+    this.onPressed,
+    this.isVisible = false,
+  });
   final String title;
   final void Function()? onPressed;
+  final bool? isVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +45,34 @@ class CustomAppBar extends StatelessWidget {
               style: AppStyles.semiBold19(context)
                   .copyWith(color: AppColors.primaryColor),
             ),
+            Spacer(),
+            Visibility(
+              visible: isVisible!,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  right: 15,
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const ScheduleView(),
+                      ),
+                    );
+                  },
+                  child: CircleAvatar(
+                    radius: 12,
+                    backgroundColor: AppColors.primaryColor,
+                    child: Icon(
+                      size: 19,
+                      Icons.schedule,
+                      color: AppColors.white,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

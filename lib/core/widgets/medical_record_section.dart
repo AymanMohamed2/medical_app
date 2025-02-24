@@ -4,8 +4,9 @@ import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 
 class MedicalRecordSection extends StatelessWidget {
-  const MedicalRecordSection({super.key, required this.value});
-  final String value;
+  const MedicalRecordSection({super.key, this.value, required this.isDoctor});
+  final String? value;
+  final bool isDoctor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +17,18 @@ class MedicalRecordSection extends StatelessWidget {
             Text(AppStrings.medicalRecord,
                 style: AppStyles.semiBold19(context)),
             Spacer(),
-            GestureDetector(
-              onTap: () {},
-              child: CircleAvatar(
-                radius: 13,
-                backgroundColor: AppColors.primaryColor,
-                child: Icon(
-                  Icons.edit,
-                  size: 15,
-                  color: AppColors.white,
+            Visibility(
+              visible: isDoctor,
+              child: GestureDetector(
+                onTap: () {},
+                child: CircleAvatar(
+                  radius: 13,
+                  backgroundColor: AppColors.primaryColor,
+                  child: Icon(
+                    Icons.edit,
+                    size: 15,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
             ),
@@ -32,7 +36,7 @@ class MedicalRecordSection extends StatelessWidget {
           ],
         ),
         SizedBox(height: 5),
-        Text(value)
+        Text(value ?? '')
       ],
     );
   }

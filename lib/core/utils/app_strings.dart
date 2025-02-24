@@ -10,6 +10,7 @@ abstract class AppStrings {
   static const String createAccount = 'Create your account';
   static const String enterEmail = 'Enter your E-mail';
   static const String enterName = 'Enter your Name';
+  static const String enterMeetingLink = 'Enter meeting link';
   static const String enterPass = 'Enter your password';
   static const String hospital = 'Hospital or clinic';
   static const String passConfirm = 'confirm your password';
@@ -20,6 +21,8 @@ abstract class AppStrings {
   static const String search = 'search';
   static const String alerts = 'alerts';
   static const String profile = 'profile';
+  static const String accept = 'Accept';
+  static const String reject = 'Reject';
   static const String hi = 'Hi, ';
   static const String hiDr = 'Hi, Dr.';
   static const String looksLike = 'looks like you got some reservations today';
@@ -29,10 +32,11 @@ abstract class AppStrings {
   static const String oxygenUnit = '%';
   static const String consult = 'Consult now';
   static const String popDoctors = 'Popular doctors';
-  static const String ecgRead = 'Tap to read ECG';
+  static const String ecgRead = 'ECG Status';
   static const String appBarAlerts = 'Alerts';
   static const String appBarProfile = 'Your profile';
   static const String vitals = 'Vitals';
+  static const String select = 'select';
   static const String name = 'Name: ';
   static const String age = 'Age: ';
   static const String state = 'State: ';
@@ -41,4 +45,11 @@ abstract class AppStrings {
   static const String upload = 'Upload your medical license';
   static const String previousSessions = 'Previous sessions';
   static const String todayReservations = 'Today’s reservations';
+  static const String patientReport = 'Patient Report';
+  static const String scheduleMeeting = 'Schedule Meeting';
+  static const String selectDate = 'Select the date';
+  static const String selectTime = 'Select the time';
+  static const String schedule = 'Schedule';
+  static const String generate = 'generate link';
+  static const String meetingLing = 'Meeting link';
 }

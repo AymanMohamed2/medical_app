@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:medical_app/core/theme/app_colors.dart';
+import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_app_bar.dart';
-import 'package:medical_app/fetures/patient_profile/presentation/view/widgets/iamge_name_gmail_section.dart';
 import 'package:medical_app/core/widgets/profile_user_info_section.dart';
-import 'package:medical_app/fetures/patient_profile/presentation/view/widgets/profile_vitals_section.dart';
+import 'package:medical_app/core/widgets/vital_signs_section.dart';
+import 'package:medical_app/fetures/patient_profile/presentation/view/widgets/iamge_name_gmail_section.dart';
 
-class ProfileViewBody extends StatelessWidget {
-  const ProfileViewBody({super.key});
+class PatientReportViewBody extends StatelessWidget {
+  const PatientReportViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomAppBar(title: AppStrings.appBarProfile, onPressed: () {}),
+          CustomAppBar(
+            title: AppStrings.patientReport,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            isVisible: true,
+          ),
           SizedBox(height: 27),
           IamgeNameGmailSection(
             imageUrl:
@@ -22,16 +29,29 @@ class ProfileViewBody extends StatelessWidget {
             name: 'Patient Name',
             gmail: 'Patient Gmail@gmail.com',
           ),
-          SizedBox(height: 30),
-          ProfileVitalsSection(),
-          SizedBox(height: 30),
+          SizedBox(height: 25),
           ProfileUserInfoSection(
-            isDoctor: false,
+            isDoctor: true,
             name: 'Patient Name',
             age: '22',
             state: 'Normal',
             medicalRecord:
                 'Lorem ipsum dolor sit amet, consectetr adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit ametsapien fringilla, mattis ligula consecter,ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue.',
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 26, top: 16, bottom: 8),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppStrings.vitals,
+                style: AppStyles.semiBold20(context)
+                    .copyWith(color: AppColors.primaryColor),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 26),
+            child: VitalSignsSection(),
           ),
         ],
       ),
