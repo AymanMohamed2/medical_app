@@ -96,7 +96,11 @@ class _TimeWidgetState extends State<TimeWidget> {
                         .copyWith(color: AppColors.white),
                   ),
                   onPressed: () {
-                    setState(() => isDone = true);
+                    if (selectedTime != TimeOfDay.now()) {
+                      setState(() {
+                        isDone = true;
+                      });
+                    }
                     widget.onTimeSelected(selectedTime);
                     Navigator.pop(context);
                   },
