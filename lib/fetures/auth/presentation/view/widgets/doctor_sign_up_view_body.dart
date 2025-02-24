@@ -19,7 +19,7 @@ class DoctorSignUpViewBody extends StatelessWidget {
             UserDataSection(
               title: AppStrings.createAccount,
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute<void>(
                     builder: (BuildContext context) =>

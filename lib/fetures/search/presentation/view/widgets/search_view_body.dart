@@ -31,17 +31,17 @@ class SearchViewBody extends StatelessWidget {
             ),
           ),
 
-          // SliverToBoxAdapter(
-          //     child:
-          //         SizedBox(height: MediaQuery.of(context).size.height * 0.15)),
-          // SliverToBoxAdapter(
-          //     child: Lottie.asset(LottieAssets
-          //         .searchADoctor)), // before getting the data from the api
+          SliverToBoxAdapter(
+              child:
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.17)),
+          SliverToBoxAdapter(
+              child: Lottie.asset(LottieAssets
+                  .searchADoctor)), // before getting the data from the api
 
-          SliverToBoxAdapter(child: SizedBox(height: 18)),
-          DoctorsGridView(), // after getting the data from the api
+          // SliverToBoxAdapter(child: SizedBox(height: 18)),
+          // DoctorsGridView(), // after getting the data from the api
 
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
+          // SliverToBoxAdapter(child: SizedBox(height: 20)),
         ],
       ),
     );
