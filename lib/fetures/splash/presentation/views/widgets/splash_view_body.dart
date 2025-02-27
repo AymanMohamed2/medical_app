@@ -59,6 +59,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       const Duration(seconds: 2),
       () {
         Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute<void>(
             builder: (BuildContext context) => const OnBoardingView(),

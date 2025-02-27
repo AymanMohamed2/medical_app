@@ -1,7 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:medical_app/core/services/shared_prefrences_service/shared_prefrences.dart';
 import 'package:medical_app/core/services/shared_prefrences_service/shared_prefrences_keys.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
