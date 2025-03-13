@@ -3,8 +3,8 @@ import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/widgets/custom_border.dart';
 import 'package:medical_app/core/widgets/custom_inkwell_widget.dart';
-import 'package:medical_app/fetures/auth/presentation/view/widgets/custom_cached_network_image.dart';
-import 'package:medical_app/fetures/doctor_home/presentation/view/patient_report_view.dart';
+import 'package:medical_app/features/auth/presentation/view/widgets/custom_cached_network_image.dart';
+import 'package:medical_app/features/doctor_home/presentation/view/patient_report_view.dart';
 
 class CustomPatientCard extends StatelessWidget {
   const CustomPatientCard({super.key, required this.isVisible});

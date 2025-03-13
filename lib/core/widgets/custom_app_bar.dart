@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
-import 'package:medical_app/fetures/doctor_home/presentation/view/schedule_view.dart';
+import 'package:medical_app/features/doctor_home/presentation/view/schedule_view.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/services/shared_prefrences_service/shared_prefrences.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
-import 'package:medical_app/fetures/splash/presentation/views/splash_view.dart';
+import 'package:medical_app/features/splash/presentation/views/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
