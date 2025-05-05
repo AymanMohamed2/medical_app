@@ -4,8 +4,15 @@ import 'package:medical_app/features/auth/presentation/view/widgets/app_logo_sec
 import 'package:medical_app/features/auth/presentation/view/widgets/user_data_section.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/or_with_section.dart';
 
-class PatientLoginViewBody extends StatelessWidget {
+class PatientLoginViewBody extends StatefulWidget {
   const PatientLoginViewBody({super.key});
+
+  @override
+  State<PatientLoginViewBody> createState() => _PatientLoginViewBodyState();
+}
+
+class _PatientLoginViewBodyState extends State<PatientLoginViewBody> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +27,7 @@ class PatientLoginViewBody extends StatelessWidget {
             AppLogoSection(),
             SizedBox(height: 50),
             UserDataSection(
+              formKey: _formKey,
               title: AppStrings.loginAccount,
               onPressed: () {},
               isVisible: false,
