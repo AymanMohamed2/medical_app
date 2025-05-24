@@ -3,8 +3,8 @@ import 'package:medical_app/features/auth/data/models/signup_request_model.dart'
 import 'package:medical_app/features/auth/data/models/user_model.dart';
 
 abstract class SignupStrategy {
-  final BaseAuthRemoteDataSource authService;
+  final BaseAuthRemoteDataSource baseAuthRemoteDataSoucrce;
 
-  SignupStrategy(this.authService);
+  SignupStrategy(this.baseAuthRemoteDataSoucrce);
   Future<UserModel> signUp(SignupRequestModel signupRequestModel);
 }

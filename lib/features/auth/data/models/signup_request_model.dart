@@ -7,14 +7,16 @@ class SignupRequestModel {
   final String? password;
   final String? hospital;
   final String? confirmPassword;
-  final SignupMethodEnum? signupMethod;
+  final AuthMethodEnum? signupMethod;
   final UserRoleEnum? userRole;
   final String? medicalCondition;
+  final bool isCompleteData;
   SignupRequestModel(
       {this.email,
       this.password,
       this.name,
       this.hospital,
+      required this.isCompleteData,
       this.signupMethod,
       this.userRole,
       this.medicalCondition,

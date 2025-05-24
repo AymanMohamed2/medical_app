@@ -1,4 +1,4 @@
-enum SignupMethodEnum {
+enum AuthMethodEnum {
   email,
   google,
   facebook,

@@ -5,7 +5,7 @@ import 'package:medical_app/core/services/shared_prefrences_service/shared_prefr
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_button.dart';
-import 'package:medical_app/features/auth/presentation/view/choose_rule_view.dart';
+import 'package:medical_app/features/auth/presentation/view/login_view.dart';
 import 'package:medical_app/features/onboarding/presentation/views/widgets/on_boarding_page_view.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
@@ -73,7 +73,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const ChooseRuleView(),
+                    builder: (BuildContext context) => const LoginView(),
                   ),
                 );
               },

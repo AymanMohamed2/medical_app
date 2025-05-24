@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
+import 'package:medical_app/core/utils/get_user_data.dart';
 
 class WelcomeSection extends StatelessWidget {
   const WelcomeSection({super.key});
@@ -23,7 +24,7 @@ class WelcomeSection extends StatelessWidget {
                   .copyWith(color: AppColors.textFieldBorderColor),
             ),
             Text(
-              'Alex',
+              GetUserData.user!.name ?? '',
               style: AppStyles.bold25(context).copyWith(color: AppColors.black),
             ),
             Spacer(),

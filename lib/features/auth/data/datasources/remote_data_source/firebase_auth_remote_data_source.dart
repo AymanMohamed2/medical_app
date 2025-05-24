@@ -6,11 +6,11 @@ import 'package:medical_app/core/exceptions/fire_store_auth_exception.dart';
 import 'package:medical_app/core/exceptions/firebase_auth_exception.dart';
 import 'package:medical_app/core/networking/firebase_collections.dart';
 import 'package:medical_app/features/auth/data/datasources/remote_data_source/base_auth_remote_datasource.dart';
+import 'package:medical_app/features/auth/data/models/login_request_model.dart';
 import 'package:medical_app/features/auth/data/models/signup_request_model.dart';
 import 'package:medical_app/features/auth/data/models/user_model.dart';
 
-class FirebaseAuthRemoteDatasource
-    extends BaseAuthRemoteDataSource<UserModel, SignupRequestModel> {
+class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
   FirebaseAuthRemoteDatasource();
 
   @override
@@ -72,8 +72,10 @@ class FirebaseAuthRemoteDatasource
       // ignore: curly_braces_in_flow_control_structures
       throw CustomFirebaseAuthException('Unable to retrieve user');
     final userModel = UserModel.fromFirebaseUser(user, signupRequestModel);
-    await saveUserData(userModel);
 
+    await saveUserData(userModel);
+    final doc = await readUser(userModel.uId!);
+    userModel.isCompeleteData = doc['isCompeleteData'] ?? false;
     return userModel;
   }
 
@@ -95,15 +97,15 @@ class FirebaseAuthRemoteDatasource
     UserModel user =
         UserModel.fromFirebaseUser(userCredential.user!, signupRequestModel);
     await saveUserData(user);
+    final doc = await readUser(user.uId!);
+    user.isCompeleteData = doc['isCompeleteData'];
     return user;
   }
 
   Future<void> saveUserData(UserModel userModel) async {
     try {
-      final doc = await FirebaseFirestore.instance
-          .collection(FirebaseCollections.users)
-          .doc(userModel.uId)
-          .get();
+      DocumentSnapshot<Map<String, dynamic>> doc =
+          await readUser(userModel.uId!);
       if (!doc.exists) {
         await FirebaseFirestore.instance
             .collection(FirebaseCollections.users)
@@ -114,5 +116,94 @@ class FirebaseAuthRemoteDatasource
       FirebaseAuth.instance.currentUser!.delete();
       throw FireStoreException('An Error Occured, Please Try Again Later');
     }
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> readUser(String uId) async {
+    final doc = await FirebaseFirestore.instance
+        .collection(FirebaseCollections.users)
+        .doc(uId)
+        .get();
+    return doc;
+  }
+
+  @override
+  Future<UserModel> loginWithEmailAndPassword(
+      LoginRequestModel loginRequestModel) async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: loginRequestModel.email!,
+        password: loginRequestModel.password!,
+      );
+      final doc = await readUser(credential.user!.uid);
+
+      final userModel = UserModel.fromFirebaseJson(
+        doc.data() as Map<String, dynamic>,
+        credential.user!,
+      );
+      return userModel;
+    } on FirebaseAuthException catch (e) {
+      throw CustomFirebaseAuthException.fromCode(e.code);
+    }
+  }
+
+  @override
+  Future<UserModel> loginWithFacebook(
+      LoginRequestModel loginRequestModel) async {
+    LoginResult? loginResult;
+    try {
+      loginResult = await FacebookAuth.instance.login();
+    } on Exception catch (_) {
+      throw CustomFirebaseAuthException('Facebook sign-in failed');
+    }
+    if (loginResult.status != LoginStatus.success) {
+      throw CustomFirebaseAuthException('Facebook sign-in failed');
+    }
+    // Create a credential from the access token
+    final User? user;
+    try {
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+      user = userCredential.user;
+    } on Exception catch (_) {
+      throw CustomFirebaseAuthException(
+          'this user is already registered with another account');
+    }
+    if (user == null)
+      // ignore: curly_braces_in_flow_control_structures
+      throw CustomFirebaseAuthException('Unable to retrieve user');
+    final doc = await readUser(user.uid);
+    if (doc.data() == null) {
+      throw CustomFirebaseAuthException('This user is not registered');
+    }
+
+    final userModel = UserModel.fromFirebaseJson(doc.data()!, user);
+    return userModel;
+  }
+
+  @override
+  Future<UserModel> loginWithGoogle(LoginRequestModel loginRequestModel) async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    googleUser == null
+        ? throw CustomFirebaseAuthException('Google Sign-In failed')
+        : null;
+    final doc = await readUser(userCredential.user!.uid);
+    if (doc.data() == null) {
+      throw CustomFirebaseAuthException('This user is not registered');
+    }
+    final userModel = UserModel.fromFirebaseJson(
+      doc.data() as Map<String, dynamic>,
+      userCredential.user!,
+    );
+    return userModel;
   }
 }

@@ -4,11 +4,11 @@ import 'package:medical_app/core/enums/signup_method_enum.dart';
 import 'package:medical_app/core/enums/user_role_enum.dart';
 import 'package:medical_app/core/functions.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
+import 'package:medical_app/core/strategies/auth_navigation_factory.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/app_logo_section.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/user_data_section.dart';
-import 'package:medical_app/features/auth/presentation/view_model/signup_cubit.dart';
-import 'package:medical_app/features/auth/presentation/view_model/signup_state.dart';
-import 'package:medical_app/features/doctor_home/presentation/view/doctor_bottom_nav_bar_view.dart';
+import 'package:medical_app/features/auth/presentation/view_model/signup_cubit/signup_cubit.dart';
+import 'package:medical_app/features/auth/presentation/view_model/signup_cubit/signup_state.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class DoctorSignUpViewBody extends StatefulWidget {
@@ -50,7 +50,7 @@ class _DoctorSignUpViewBodyState extends State<DoctorSignUpViewBody> {
                         if (_formKey.currentState!.validate()) {
                           context
                               .read<SignupCubit>()
-                              .signUp(SignupMethodEnum.email);
+                              .signUp(AuthMethodEnum.email, true);
                         }
                       },
                       isVisible: true,
@@ -69,18 +69,9 @@ class _DoctorSignUpViewBodyState extends State<DoctorSignUpViewBody> {
 
   void doctorSignupListener(context, state) {
     if (state is SignupSuccess) {
-      handleSuccessSignup(context);
+      AuthNavigationFactory.create(state.user).executeNavigation(context);
     } else if (state is SignupError) {
       customErrorSnakeBar(context, state.failure);
     }
-  }
-
-  void handleSuccessSignup(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) => const DoctorBottomNavBarView(),
-      ),
-    );
   }
 }

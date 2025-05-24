@@ -5,7 +5,7 @@ import 'package:medical_app/core/services/shared_prefrences_service/shared_prefr
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
-import 'package:medical_app/features/auth/presentation/view/choose_rule_view.dart';
+import 'package:medical_app/features/auth/presentation/view/login_view.dart';
 
 class PageviewItem extends StatelessWidget {
   const PageviewItem({
@@ -47,7 +47,7 @@ class PageviewItem extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const ChooseRuleView(),
+                    builder: (BuildContext context) => const LoginView(),
                   ),
                 );
               },

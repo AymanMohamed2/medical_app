@@ -5,4 +5,11 @@ class AppValidators {
     }
     return null;
   }
+
+  static String? passwordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter an password';
+    }
+    return null;
+  }
 }

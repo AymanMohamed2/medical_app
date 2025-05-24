@@ -7,7 +7,7 @@ import 'package:medical_app/core/utils/app_validators.dart';
 import 'package:medical_app/core/widgets/custom_button.dart';
 import 'package:medical_app/core/widgets/custom_text_form_field.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/upload_license_widget.dart';
-import 'package:medical_app/features/auth/presentation/view_model/signup_cubit.dart';
+import 'package:medical_app/features/auth/presentation/view_model/signup_cubit/signup_cubit.dart';
 
 class UserDataSection extends StatelessWidget {
   const UserDataSection({
