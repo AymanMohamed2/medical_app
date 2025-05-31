@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
+import 'package:medical_app/features/patient_home/data/models/doctors_model/doctor_model.dart';
 
 class DoctorInfoSection extends StatelessWidget {
-  const DoctorInfoSection({super.key});
+  const DoctorInfoSection({super.key, required this.doctorModel});
+  final DoctorModel doctorModel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class DoctorInfoSection extends StatelessWidget {
           child: Text(
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              'Dr. aya mohamed',
+              doctorModel.name,
               style: AppStyles.semiBold14(context)),
         ),
         Align(
@@ -25,7 +27,7 @@ class DoctorInfoSection extends StatelessWidget {
           child: Text(
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            'Neurologist',
+            doctorModel.speciality,
             style: AppStyles.regular11(context)
                 .copyWith(color: AppColors.darkGray),
           ),

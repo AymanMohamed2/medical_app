@@ -5,7 +5,7 @@ import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/features/alerts/presentation/views/alerts_view.dart';
 import 'package:medical_app/features/patient_home/presentation/view/home_view.dart';
 import 'package:medical_app/features/patient_profile/presentation/view/profile_view.dart';
-import 'package:medical_app/features/search/presentation/view/search_view.dart';
+import 'package:medical_app/features/patient_home/presentation/view/search_view.dart';
 
 class PatientBottomNavBarView extends StatefulWidget {
   const PatientBottomNavBarView({super.key});

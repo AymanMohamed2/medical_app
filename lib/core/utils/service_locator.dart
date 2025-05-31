@@ -6,6 +6,8 @@ import 'package:medical_app/features/auth/data/datasources/remote_data_source/ba
 import 'package:medical_app/features/auth/data/datasources/remote_data_source/firebase_auth_remote_data_source.dart';
 import 'package:medical_app/features/auth/data/repository/auth_repository.dart';
 import 'package:medical_app/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:medical_app/features/patient_home/data/repository/doctors_repo_impl.dart';
+import 'package:medical_app/features/patient_home/data/repository/doctors_repository.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -24,5 +26,9 @@ class ServiceLocator {
         getIt.get<BaseAuthRemoteDataSource>(),
         getIt.get<BaseAuthLocaleDatasource>(),
         getIt.get<LoginStrategyFactory>()));
+
+    getIt.registerSingleton<DoctorsRepository>(
+      DoctorsRepoImpl(),
+    );
   }
 }

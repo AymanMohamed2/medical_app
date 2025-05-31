@@ -5,11 +5,12 @@ import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_border.dart';
 import 'package:medical_app/core/widgets/custom_button.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/custom_cached_network_image.dart';
+import 'package:medical_app/features/patient_home/data/models/doctors_model/doctor_model.dart';
 import 'package:medical_app/features/patient_home/presentation/view/widgets/doctor_info_section.dart';
 
 class CustomDoctorCard extends StatelessWidget {
-  const CustomDoctorCard({super.key});
-
+  const CustomDoctorCard({super.key, required this.doctorModel});
+  final DoctorModel doctorModel;
   @override
   Widget build(BuildContext context) {
     return CustomBorder(
@@ -30,12 +31,13 @@ class CustomDoctorCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(22),
                   child: CustomCashedNetworkImage(
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                    imageUrl: doctorModel.imageUrl,
                   ),
                 ),
               ),
-              DoctorInfoSection(),
+              DoctorInfoSection(
+                doctorModel: doctorModel,
+              ),
               SizedBox(
                 height: 32,
                 child: CustomButton(

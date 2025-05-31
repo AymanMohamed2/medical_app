@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
+import 'package:medical_app/features/patient_home/presentation/view/widgets/doctors_bloc_builder.dart';
 import 'package:medical_app/features/patient_home/presentation/view/widgets/ecg_readings.dart';
-import 'package:medical_app/features/auth/presentation/view/widgets/doctors_grid_view.dart';
 import 'package:medical_app/core/widgets/vital_signs_section.dart';
 import 'package:medical_app/features/patient_home/presentation/view/widgets/welcome_section.dart';
 
@@ -35,7 +35,7 @@ class HomeViewBody extends StatelessWidget {
               ),
             ),
           ),
-          DoctorsGridView(),
+          DoctorsBlocBuilder(),
         ],
       ),
     );
