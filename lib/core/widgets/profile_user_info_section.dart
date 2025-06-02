@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
-import 'package:medical_app/fetures/patient_profile/presentation/view/widgets/custom_user_info_widget.dart';
+import 'package:medical_app/features/patient_profile/presentation/view/widgets/custom_user_info_widget.dart';
 import 'package:medical_app/core/widgets/medical_record_section.dart';
 
 class ProfileUserInfoSection extends StatelessWidget {

@@ -1,0 +1,4 @@
+enum UserRoleEnum {
+  doctor,
+  patient;
+}

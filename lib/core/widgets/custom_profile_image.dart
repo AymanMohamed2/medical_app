@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/widgets/custom_border.dart';
-import 'package:medical_app/fetures/auth/presentation/view/widgets/custom_cached_network_image.dart';
+import 'package:medical_app/features/auth/presentation/view/widgets/custom_cached_network_image.dart';
 
 class CustomProfileImage extends StatelessWidget {
   const CustomProfileImage({
