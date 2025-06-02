@@ -40,7 +40,6 @@ class SearchViewBody extends StatelessWidget {
 
           // SliverToBoxAdapter(child: SizedBox(height: 18)),
           // DoctorsGridView(), // after getting the data from the api
-
           // SliverToBoxAdapter(child: SizedBox(height: 20)),
         ],
       ),
