@@ -51,6 +51,8 @@ abstract class AppStrings {
   static const String selectTime = 'Select the time';
   static const String schedule = 'Schedule';
   static const String generate = 'generate link';
+  static const String ecgStatusNormal = 'ECG rate is normal';
+  static const String ecgStatusAbnormal = 'ECG rate is abnormal';
   static const String meetingLing = 'Meeting link';
   static const String ecgReading = '((ECG Readings))';
 }

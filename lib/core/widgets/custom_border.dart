@@ -8,17 +8,20 @@ class CustomBorder extends StatelessWidget {
     this.padding,
     this.radius,
     this.borderClolor,
+    this.backgroundColor,
   });
   final Widget child;
   final EdgeInsetsGeometry? padding;
   final double? radius;
   final Color? borderClolor;
+  final Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding:
           padding ?? const EdgeInsets.symmetric(vertical: 13, horizontal: 15),
       decoration: BoxDecoration(
+          color: backgroundColor,
           border: Border.all(
             color: borderClolor ?? AppColors.primaryColor,
           ),

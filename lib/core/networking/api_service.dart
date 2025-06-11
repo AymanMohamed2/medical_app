@@ -6,7 +6,7 @@ class ApiService {
 
   ApiService(this._dio);
 
-  Future<Map<String, dynamic>> get(
+  Future<Response<dynamic>> get(
       {required String url,
       Map<String, dynamic>? headers,
       CancelToken? cancelToken}) async {
@@ -17,11 +17,10 @@ class ApiService {
         headers: headers ??
             {
               'Authorization': 'Bearer ${ApiConstance.apiKey}',
-              'accept': "application/json"
             },
       ),
     );
-    return response.data;
+    return response;
   }
 
   Future<dynamic> delete(
@@ -39,7 +38,7 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> patch({
+  Future<Response<dynamic>> patch({
     required String url,
     Map<String, dynamic>? headers,
     required Map<String, dynamic> data,
@@ -49,7 +48,7 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> post(
+  Future<Response<dynamic>> post(
       {required String url,
       Map<String, dynamic>? headers,
       required Map<String, dynamic> data}) async {
@@ -58,7 +57,7 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> put(
+  Future<Response<dynamic>> put(
       {required String url,
       Map<String, dynamic>? headers,
       required Map<String, dynamic> data}) async {
