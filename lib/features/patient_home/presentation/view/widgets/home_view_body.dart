@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medical_app/core/enums/ecg_status_enum.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
@@ -6,6 +8,7 @@ import 'package:medical_app/features/patient_home/presentation/view/widgets/doct
 import 'package:medical_app/features/patient_home/presentation/view/widgets/ecg_readings.dart';
 import 'package:medical_app/core/widgets/vital_signs_section.dart';
 import 'package:medical_app/features/patient_home/presentation/view/widgets/welcome_section.dart';
+import 'package:medical_app/features/patient_home/presentation/view_model/fetch_ecg_status_cubit/fetch_ecg_status_cubit.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -23,7 +26,17 @@ class HomeViewBody extends StatelessWidget {
             child: VitalSignsSection(),
           ),
           SliverToBoxAdapter(
-            child: EcgReadings(),
+            child: BlocBuilder<FetchEcgStatusCubit, FetchEcgStatusState>(
+              builder: (context, state) {
+                if (state is FetchEcgStatusSuccess) {
+                  return EcgStatusWidgetFactory.create(
+                      state.baseEcgModel.ecgStatusEnum);
+                } else if (state is FetchEcgStatusLoading) {
+                  return EcgReadingsLoading();
+                }
+                return EcgReadings();
+              },
+            ),
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -39,5 +52,22 @@ class HomeViewBody extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+abstract class EcgStatusWidgetFactory {
+  static Widget create(EcgStatusEnum ecgStatusEnum) {
+    switch (ecgStatusEnum) {
+      case EcgStatusEnum.normal:
+        return EcgReadings(
+          title: AppStrings.ecgStatusNormal,
+          backgroundColor: AppColors.green,
+        );
+      case EcgStatusEnum.abnormal:
+        return EcgReadings(
+          title: AppStrings.ecgStatusAbnormal,
+          backgroundColor: AppColors.darkRedColor,
+        );
+    }
   }
 }

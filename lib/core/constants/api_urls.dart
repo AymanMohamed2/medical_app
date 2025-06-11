@@ -1,7 +1,8 @@
 import 'package:medical_app/core/constants/api_constance.dart';
 
-abstract class ApiUrls {
-  static String loginUrl =
-      '${ApiConstance.appwriteBaseUrl}account/sessions/phone';
-  static String apiLoginUrl = '${ApiConstance.apiBaseUrl}register-user/';
+class ApiUrls {
+  static const String pbmUrl = '${ApiConstance.apiBaseUrl}beat_per_min';
+  static const String ecgUrl = '${ApiConstance.apiBaseUrl}ECG_reading';
+  static const String patientVitalsUrl =
+      '${ApiConstance.apiBaseUrl}patient_vitals/day/1/hour/1';
 }
