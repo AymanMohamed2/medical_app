@@ -36,7 +36,14 @@ class MedicalRecordSection extends StatelessWidget {
           ],
         ),
         SizedBox(height: 5),
-        Text(value ?? '')
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            value ?? '',
+            style: AppStyles.semiBold15(context),
+            textAlign: TextAlign.left,
+          ),
+        ),
       ],
     );
   }
