@@ -7,4 +7,5 @@ abstract class LottieAssets {
   static const String noInternet = 'assets/lottie/no_internet.json';
   static const String noImage = 'assets/lottie/no_image.json';
   static const String searchADoctor = 'assets/lottie/search_a_doctor.json';
+  static const String mic = 'assets/lottie/mic.json';
 }

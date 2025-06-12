@@ -3,6 +3,26 @@ import 'package:medical_app/core/theme/size_config.dart';
 import 'package:medical_app/core/utils/app_fonts.dart';
 
 abstract class AppStyles {
+  static const TextStyle styleRegular14 = TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w400,
+    height: 0,
+  );
+
+  static const TextStyle styleBold20 = TextStyle(
+    color: Colors.white,
+    fontSize: 20,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w600,
+    height: 0,
+  );
+  static const TextStyle styleBold35 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 35,
+  );
+
   static TextStyle regular10(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 10),
