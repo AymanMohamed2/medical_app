@@ -12,4 +12,11 @@ class AppValidators {
     }
     return null;
   }
+
+  static String? generalValidator(String? value, [String? fieldName]) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter an $fieldName';
+    }
+    return null;
+  }
 }

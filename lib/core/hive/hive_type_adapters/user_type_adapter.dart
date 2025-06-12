@@ -14,6 +14,8 @@ class UserModelTypeAdapter extends TypeAdapter<UserModel> {
       hospital: reader.readString(),
       signupMethod: AuthMethodEnum.values[reader.readUint32()],
       userRole: UserRoleEnum.values[reader.readUint32()],
+      age: reader.readString(),
+      medicalCondidion: reader.readString(),
     );
   }
 
@@ -29,5 +31,7 @@ class UserModelTypeAdapter extends TypeAdapter<UserModel> {
     writer.writeString(obj.hospital ?? '');
     writer.writeUint32(obj.signupMethod?.index ?? 0);
     writer.writeUint32(obj.userRole?.index ?? 0);
+    writer.writeString(obj.age ?? '');
+    writer.writeString(obj.medicalCondidion ?? '');
   }
 }

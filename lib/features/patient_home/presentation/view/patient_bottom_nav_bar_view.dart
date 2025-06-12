@@ -10,6 +10,7 @@ import 'package:medical_app/features/patient_home/data/repository/ecg_repository
 import 'package:medical_app/features/patient_home/data/repository/patient_vitals_repository.dart';
 import 'package:medical_app/features/patient_home/data/repository/pbm_repository.dart';
 import 'package:medical_app/features/patient_home/presentation/view/home_view.dart';
+import 'package:medical_app/features/patient_home/presentation/view_model/consult_doctor_cubit/consult_doctor_cubit.dart';
 import 'package:medical_app/features/patient_home/presentation/view_model/fetch_bpm_cubit/fetch_bpm_cubit.dart';
 import 'package:medical_app/features/patient_home/presentation/view_model/fetch_doctors_cubit.dart/fetch_doctors_cubit.dart';
 import 'package:medical_app/features/patient_home/presentation/view_model/fetch_ecg_status_cubit/fetch_ecg_status_cubit.dart';
@@ -52,6 +53,9 @@ class _PatientBottomNavBarViewState extends State<PatientBottomNavBarView> {
             create: (context) =>
                 FetchPatientVitalsCubit(getIt.get<PatientVitalsRepository>())
                   ..fetchPatientVitals()),
+        BlocProvider(
+            create: (context) =>
+                ConsultDoctorCubit(getIt.get<DoctorsRepository>())),
       ],
       child: Scaffold(
         body: Center(

@@ -9,11 +9,14 @@ class FetchPatientVitalsCubit extends Cubit<FetchPatientVitalsState> {
   FetchPatientVitalsCubit(this._patientVitalsRepository)
       : super(FetchPatientVitalsInitial());
 
+  BasePatientVitalsModel? basePatientVitalsModel;
   final PatientVitalsRepository _patientVitalsRepository;
   Future<void> fetchPatientVitals() async {
     emit(FetchPatientVitalsLoading());
     final result = await _patientVitalsRepository.fetchPatientVitals();
-    result.fold((failure) => emit(FetchPatientVitalsFailure(failure)),
-        (ecg) => emit(FetchPatientVitalsSuccess(ecg)));
+    result.fold((failure) => emit(FetchPatientVitalsFailure(failure)), (ecg) {
+      basePatientVitalsModel = ecg;
+      emit(FetchPatientVitalsSuccess(ecg));
+    });
   }
 }
