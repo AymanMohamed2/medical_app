@@ -51,30 +51,33 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       formKey: _formKey,
                     ),
                     SizedBox(height: 10),
-                    RichText(
-                      text: TextSpan(
-                        text: "Don't have an account? ",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Register',
-                            style: TextStyle(
-                              color: AppColors.primaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ChooseRuleView()));
-                              },
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                              text: 'Register',
+                              style: TextStyle(
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChooseRuleView()));
+                                },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 60),
