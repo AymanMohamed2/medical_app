@@ -11,11 +11,14 @@ class SignupRequestModel {
   final UserRoleEnum? userRole;
   final String? medicalCondition;
   final bool isCompleteData;
+  final String? age;
+
   SignupRequestModel(
       {this.email,
       this.password,
       this.name,
       this.hospital,
+      this.age,
       required this.isCompleteData,
       this.signupMethod,
       this.userRole,

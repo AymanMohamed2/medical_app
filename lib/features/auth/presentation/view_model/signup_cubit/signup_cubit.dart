@@ -12,7 +12,9 @@ class SignupCubit extends Cubit<SignupState> {
   String? password;
   String? hospital;
   String? confirmPassword;
+  String? medicalCondidion;
   UserRoleEnum? userRoleEnum;
+  String? age;
 
   final AuthRepository authRepository;
   Future<void> signUp(AuthMethodEnum signupMethod, bool isCompleteData) async {
@@ -32,6 +34,8 @@ class SignupCubit extends Cubit<SignupState> {
         name: name,
         hospital: hospital,
         userRole: userRoleEnum,
+        age: age,
+        medicalCondition: medicalCondidion,
         confirmPassword: confirmPassword);
   }
 
@@ -40,5 +44,8 @@ class SignupCubit extends Cubit<SignupState> {
   void setConfirmPassword(String confirmPassword) =>
       this.confirmPassword = confirmPassword;
   void setName(String name) => this.name = name;
+  void setAge(String age) => this.age = age;
   void setHospital(String hospital) => this.hospital = hospital;
+  void setMedicalCondidion(String medicalCondidion) =>
+      this.medicalCondidion = medicalCondidion;
 }

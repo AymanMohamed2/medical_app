@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
@@ -35,9 +36,24 @@ class UserDataSection extends StatelessWidget {
           Text(title, style: AppStyles.bold20(context)),
           SizedBox(height: 15),
           CustomTextField(
-            validator: AppValidators.validateEmail,
+            validator: (value) {
+              return AppValidators.generalValidator(value, AppStrings.name);
+            },
             hintText: AppStrings.enterName,
             onChanged: context.read<SignupCubit>().setName,
+          ),
+          SizedBox(height: 20),
+          CustomTextField(
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(3),
+            ],
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              return AppValidators.generalValidator(value, AppStrings.age);
+            },
+            hintText: AppStrings.enterAge,
+            onChanged: context.read<SignupCubit>().setAge,
           ),
           SizedBox(height: 20),
           CustomTextField(
@@ -51,7 +67,10 @@ class UserDataSection extends StatelessWidget {
             child: Column(
               children: [
                 CustomTextField(
-                  validator: AppValidators.validateEmail,
+                  validator: (value) {
+                    return AppValidators.generalValidator(
+                        value, AppStrings.hospital);
+                  },
                   onChanged: context.read<SignupCubit>().setHospital,
                   hintText: AppStrings.hospital,
                 ),
@@ -61,7 +80,10 @@ class UserDataSection extends StatelessWidget {
           ),
           StatefulBuilder(
             builder: (context, setState) => CustomTextField(
-              validator: AppValidators.validateEmail,
+              validator: (value) {
+                return AppValidators.generalValidator(
+                    value, AppStrings.password);
+              },
               onChanged: context.read<SignupCubit>().setPassword,
               obscureText: isActive,
               suffixIcon: IconButton(
@@ -88,7 +110,10 @@ class UserDataSection extends StatelessWidget {
                 SizedBox(height: 20),
                 StatefulBuilder(
                   builder: (context, setState) => CustomTextField(
-                    validator: AppValidators.validateEmail,
+                    validator: (value) {
+                      return AppValidators.generalValidator(
+                          value, AppStrings.password);
+                    },
                     onChanged: context.read<SignupCubit>().setConfirmPassword,
                     obscureText: isActive,
                     suffixIcon: IconButton(
@@ -112,7 +137,12 @@ class UserDataSection extends StatelessWidget {
                 Visibility(
                   visible: !isDoctor,
                   child: CustomTextField(
-                    hintText: AppStrings.medicalCondition,
+                    validator: (value) {
+                      return AppValidators.generalValidator(
+                          value, AppStrings.medicalCondition);
+                    },
+                    onChanged: context.read<SignupCubit>().setMedicalCondidion,
+                    hintText: AppStrings.typeYourMedicalCondition,
                   ),
                 ),
               ],

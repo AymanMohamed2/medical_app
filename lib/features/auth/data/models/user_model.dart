@@ -8,17 +8,21 @@ class UserModel {
   final String? email;
   final String? password;
   final String? hospital;
+  final String image;
   final String? confirmPassword;
   final AuthMethodEnum? signupMethod;
   final UserRoleEnum? userRole;
   final String? uId;
   final String? medicalCondidion;
+  final String? age;
   bool isCompeleteData;
   UserModel(
       {this.name,
       this.email,
+      this.image = '',
       this.password,
       this.hospital,
+      this.age,
       this.confirmPassword,
       this.signupMethod,
       required this.isCompeleteData,
@@ -32,6 +36,7 @@ class UserModel {
           isCompeleteData: signupRequestModel.isCompleteData,
           uId: user.uid,
           email: user.email,
+          age: signupRequestModel.age,
           name: user.displayName,
           signupMethod: signupRequestModel.signupMethod,
           userRole: signupRequestModel.userRole);
@@ -42,6 +47,7 @@ class UserModel {
           medicalCondidion: signupRequestModel.medicalCondition,
           uId: user.uid,
           email: signupRequestModel.email,
+          age: signupRequestModel.age,
           password: signupRequestModel.password,
           name: signupRequestModel.name,
           hospital: signupRequestModel.hospital,
@@ -54,6 +60,7 @@ class UserModel {
           medicalCondidion: json['medicalCondidion'],
           uId: user.uid,
           email: json['email'],
+          age: json['age'],
           hospital: json['hospital'],
           signupMethod: getSignupMethod(json['signupMethod']),
           userRole: json['userRole'] == 'patient'
@@ -68,6 +75,7 @@ class UserModel {
         'hospital': hospital,
         'signupMethod': signupMethod?.name,
         'userRole': userRole?.name,
+        'age': age,
       };
 
   static AuthMethodEnum getSignupMethod(String method) {

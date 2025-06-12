@@ -10,11 +10,16 @@ abstract class AppStrings {
   static const String createAccount = 'Create your account';
   static const String enterEmail = 'Enter your E-mail';
   static const String enterName = 'Enter your Name';
+  static const String enterAge = 'Enter your age';
+  static const String email = 'Email';
+
   static const String enterMeetingLink = 'Enter meeting link';
   static const String enterPass = 'Enter your password';
   static const String hospital = 'Hospital or clinic';
   static const String passConfirm = 'confirm your password';
-  static const String medicalCondition = 'Type your medical condition';
+  static const String password = 'confirm';
+  static const String typeYourMedicalCondition = 'Type your medical condition';
+  static const String medicalCondition = 'medical condition';
   static const String login = 'Login';
   static const String signUp = 'Sign up';
   static const String home = 'home';
@@ -38,13 +43,13 @@ abstract class AppStrings {
   static const String vitals = 'Vitals';
   static const String select = 'select';
   static const String name = 'Name: ';
-  static const String age = 'Age: ';
+  static const String age = 'age: ';
   static const String state = 'State: ';
   static const String field = 'Field: ';
   static const String medicalRecord = 'Medical Record: ';
   static const String upload = 'Upload your medical license';
   static const String previousSessions = 'Previous sessions';
-  static const String todayReservations = 'Today’s reservations';
+  static const String todayReservations = 'Today\'s reservations';
   static const String patientReport = 'Patient Report';
   static const String scheduleMeeting = 'Schedule Meeting';
   static const String selectDate = 'Select the date';

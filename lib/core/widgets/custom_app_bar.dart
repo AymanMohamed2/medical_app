@@ -9,10 +9,12 @@ class CustomAppBar extends StatelessWidget {
     required this.title,
     this.onPressed,
     this.isVisible = false,
+    this.isBackButtonVisible = true,
   });
   final String title;
   final void Function()? onPressed;
   final bool? isVisible;
+  final bool isBackButtonVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +34,15 @@ class CustomAppBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            IconButton(
-              onPressed: onPressed,
-              icon: const Icon(
-                size: 19,
-                Icons.arrow_back_ios,
-                color: AppColors.primaryColor,
+            Visibility(
+              visible: isBackButtonVisible,
+              child: IconButton(
+                onPressed: onPressed,
+                icon: const Icon(
+                  size: 19,
+                  Icons.arrow_back_ios,
+                  color: AppColors.primaryColor,
+                ),
               ),
             ),
             Text(

@@ -8,49 +8,63 @@ import 'package:medical_app/features/patient_home/presentation/view/widgets/doct
 import 'package:medical_app/features/patient_home/presentation/view/widgets/ecg_readings.dart';
 import 'package:medical_app/core/widgets/vital_signs_section.dart';
 import 'package:medical_app/features/patient_home/presentation/view/widgets/welcome_section.dart';
+import 'package:medical_app/features/patient_home/presentation/view_model/consult_doctor_cubit/consult_doctor_cubit.dart';
 import 'package:medical_app/features/patient_home/presentation/view_model/fetch_ecg_status_cubit/fetch_ecg_status_cubit.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 17),
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: WelcomeSection(),
-          ),
-          SliverToBoxAdapter(
-            child: VitalSignsSection(),
-          ),
-          SliverToBoxAdapter(
-            child: BlocBuilder<FetchEcgStatusCubit, FetchEcgStatusState>(
-              builder: (context, state) {
-                if (state is FetchEcgStatusSuccess) {
-                  return EcgStatusWidgetFactory.create(
-                      state.baseEcgModel.ecgStatusEnum);
-                } else if (state is FetchEcgStatusLoading) {
-                  return EcgReadingsLoading();
-                }
-                return EcgReadings();
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
+    return BlocBuilder<ConsultDoctorCubit, ConsultDoctorState>(
+      builder: (context, state) {
+        return PopScope(
+          canPop: state is! ConsultDoctorLoading,
+          child: ModalProgressHUD(
+            dismissible: state is ConsultDoctorLoading,
+            inAsyncCall: state is ConsultDoctorLoading,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Text(
-                AppStrings.popDoctors,
-                style: AppStyles.semiBold19(context)
-                    .copyWith(color: AppColors.primaryColor),
+              padding: const EdgeInsets.symmetric(horizontal: 17),
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: WelcomeSection(),
+                  ),
+                  SliverToBoxAdapter(
+                    child: VitalSignsSection(),
+                  ),
+                  SliverToBoxAdapter(
+                    child:
+                        BlocBuilder<FetchEcgStatusCubit, FetchEcgStatusState>(
+                      builder: (context, state) {
+                        if (state is FetchEcgStatusSuccess) {
+                          return EcgStatusWidgetFactory.create(
+                              state.baseEcgModel.ecgStatusEnum);
+                        } else if (state is FetchEcgStatusLoading) {
+                          return EcgReadingsLoading();
+                        }
+                        return EcgReadings();
+                      },
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Text(
+                        AppStrings.popDoctors,
+                        style: AppStyles.semiBold19(context)
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
+                    ),
+                  ),
+                  DoctorsBlocBuilder(),
+                ],
               ),
             ),
           ),
-          DoctorsBlocBuilder(),
-        ],
-      ),
+        );
+      },
     );
   }
 }

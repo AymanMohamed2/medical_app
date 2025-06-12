@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.fillColor,
+    this.inputFormatters,
     this.borderColor,
     this.errorBorderColor,
     this.validator,
@@ -42,9 +44,11 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? errorStyle;
   final int? maxLines;
   final bool obscureText;
+  final List<TextInputFormatter>? inputFormatters;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: inputFormatters,
       maxLines: maxLines,
       autofocus: autoFocus,
       autovalidateMode: autovalidateMode,
