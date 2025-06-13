@@ -12,6 +12,12 @@ abstract class AppStrings {
   static const String enterName = 'Enter your Name';
   static const String enterAge = 'Enter your age';
   static const String email = 'Email';
+  static const String uploadImage = 'Upload image';
+  static const String pleaseUploadImage = 'Please upload image';
+  static const String uploadPhotoFrom = 'Upload photo from';
+  static const String camera = '📷 Camera';
+  static const String gallery = '🖼️ Gallery';
+  static const String noAlerts = 'No alerts';
 
   static const String enterMeetingLink = 'Enter meeting link';
   static const String enterPass = 'Enter your password';

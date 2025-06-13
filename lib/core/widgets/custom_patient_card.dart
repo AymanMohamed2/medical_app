@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/widgets/custom_border.dart';
 import 'package:medical_app/core/widgets/custom_inkwell_widget.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/custom_cached_network_image.dart';
+import 'package:medical_app/features/doctor_home/data/models/base_doctors_consaltant_model.dart';
 import 'package:medical_app/features/doctor_home/presentation/view/patient_report_view.dart';
+import 'package:medical_app/features/doctor_home/presentation/view_model/fetch_consaltants_cubit/fetch_consaltants_cubit.dart';
 
 class CustomPatientCard extends StatelessWidget {
-  const CustomPatientCard({super.key, required this.isVisible});
+  const CustomPatientCard(
+      {super.key,
+      required this.isVisible,
+      required this.doctorConsaltantModel});
   final bool isVisible;
-
+  final DoctorConsaltantModel doctorConsaltantModel;
   @override
   Widget build(BuildContext context) {
     return CustomInkwellWidget(
@@ -18,8 +24,12 @@ class CustomPatientCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => PatientReportView(
-              isVisible: isVisible,
+            builder: (BuildContext acontext) => BlocProvider.value(
+              value: context.read<FetchConsaltantsCubit>(),
+              child: PatientReportView(
+                doctorConsaltantModel: doctorConsaltantModel,
+                isVisible: isVisible,
+              ),
             ),
           ),
         );
@@ -37,10 +47,7 @@ class CustomPatientCard extends StatelessWidget {
                 height: 87,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(22),
-                  child: CustomCashedNetworkImage(
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
-                  ),
+                  child: CustomCashedNetworkImage(),
                 ),
               ),
             ),
@@ -50,12 +57,12 @@ class CustomPatientCard extends StatelessWidget {
                 children: [
                   SizedBox(height: 18),
                   Text(
-                    'Alex chen',
+                    doctorConsaltantModel.patientName,
                     overflow: TextOverflow.ellipsis,
                     style: AppStyles.semiBold19(context),
                   ),
                   Text(
-                    'diagnoses',
+                    doctorConsaltantModel.ecgStatusEnum,
                     overflow: TextOverflow.ellipsis,
                     style: AppStyles.regularr14(context),
                   ),
@@ -65,7 +72,7 @@ class CustomPatientCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          '9:00 pm',
+                          doctorConsaltantModel.time!,
                           style: AppStyles.bold13(context),
                         ),
                       ],

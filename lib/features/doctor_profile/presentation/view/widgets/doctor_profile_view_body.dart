@@ -3,8 +3,8 @@ import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_app_bar.dart';
+import 'package:medical_app/features/doctor_home/presentation/view/widgets/fetch_consaltant_bloc_builder.dart';
 import 'package:medical_app/features/doctor_profile/presentation/view/widgets/doctor_profile_info_section.dart';
-import 'package:medical_app/core/widgets/patient_card_list_view.dart';
 import 'package:medical_app/features/patient_profile/presentation/view/widgets/iamge_name_gmail_section.dart';
 
 class DoctorProfileViewBody extends StatelessWidget {
@@ -16,7 +16,10 @@ class DoctorProfileViewBody extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
             child: CustomAppBar(
-                title: AppStrings.appBarProfile, onPressed: () {})),
+                isLogoutVisible: true,
+                isVisible: false,
+                title: AppStrings.appBarProfile,
+                onPressed: () {})),
         SliverToBoxAdapter(child: SizedBox(height: 27)),
         SliverToBoxAdapter(
           child: IamgeNameGmailSection(
@@ -42,9 +45,9 @@ class DoctorProfileViewBody extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 15)),
-        PatientCardListView(
-          isIconVisible: false,
-          isHome: false,
+        FetchConsaltantBlocBuilder(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          isScachuleIconVisible: false,
         ),
       ],
     );

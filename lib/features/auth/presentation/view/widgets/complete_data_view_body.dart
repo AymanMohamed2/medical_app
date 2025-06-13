@@ -4,8 +4,8 @@ import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/compleate_data_section.dart';
 
 class CompleteDataViewBody extends StatelessWidget {
-  const CompleteDataViewBody({super.key});
-
+  const CompleteDataViewBody({super.key, this.isDoctor = true});
+  final bool isDoctor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,9 +26,8 @@ class CompleteDataViewBody extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: CompleateDataSection(
-              formKey: GlobalKey<FormState>(),
               isVisible: true,
-              isDoctor: true,
+              isDoctor: isDoctor,
               onPressed: () {},
             ),
           )

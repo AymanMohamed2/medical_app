@@ -43,8 +43,15 @@ class ApiService {
     Map<String, dynamic>? headers,
     required Map<String, dynamic> data,
   }) async {
-    var response =
-        await _dio.patch(url, data: data, options: Options(headers: headers));
+    var response = await _dio.patch(url,
+        data: data,
+        options: Options(
+          headers: headers ??
+              {
+                'Authorization': 'Bearer ${ApiConstance.apiKey}',
+                'accept': "application/json"
+              },
+        ));
     return response.data;
   }
 
@@ -52,9 +59,15 @@ class ApiService {
       {required String url,
       Map<String, dynamic>? headers,
       required Map<String, dynamic> data}) async {
-    var response =
-        await _dio.post(url, data: data, options: Options(headers: headers));
-    return response.data;
+    var response = await _dio.post(url,
+        data: data,
+        options: Options(
+          headers: headers ??
+              {
+                'Authorization': 'Bearer ${ApiConstance.apiKey}',
+              },
+        ));
+    return response;
   }
 
   Future<Response<dynamic>> put(

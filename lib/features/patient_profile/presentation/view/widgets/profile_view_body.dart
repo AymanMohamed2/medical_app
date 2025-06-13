@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/utils/get_user_data.dart';
 import 'package:medical_app/core/widgets/custom_app_bar.dart';
+import 'package:medical_app/core/widgets/logout_button.dart';
 import 'package:medical_app/features/patient_home/presentation/view_model/fetch_ecg_status_cubit/fetch_ecg_status_cubit.dart';
 import 'package:medical_app/features/patient_profile/presentation/view/widgets/iamge_name_gmail_section.dart';
 import 'package:medical_app/core/widgets/profile_user_info_section.dart';
@@ -44,6 +45,11 @@ class ProfileViewBody extends StatelessWidget {
               );
             },
           ),
+          SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: LogoutButton(),
+          )
         ],
       ),
     );

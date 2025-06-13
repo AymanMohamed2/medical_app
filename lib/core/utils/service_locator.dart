@@ -14,6 +14,8 @@ import 'package:medical_app/features/chat/data/datasources/remote_data_source.da
 import 'package:medical_app/features/chat/data/repository/home_repo_impl.dart';
 import 'package:medical_app/features/chat/domain/repositories/home_repository.dart';
 import 'package:medical_app/features/chat/domain/usecases/send_message_use_case.dart';
+import 'package:medical_app/features/doctor_home/data/repository/consaltant_doctor_repo_impl.dart';
+import 'package:medical_app/features/doctor_home/data/repository/consaltant_doctor_repository.dart';
 import 'package:medical_app/features/patient_home/data/repository/doctors_repo_impl.dart';
 import 'package:medical_app/features/patient_home/data/repository/doctors_repository.dart';
 import 'package:medical_app/features/patient_home/data/repository/ecg_repository.dart';
@@ -68,5 +70,8 @@ class ServiceLocator {
         HomeRepoImpl(getIt.get<BaseHomeDataSource>()));
     getIt.registerSingleton<SendMessageUseCase>(
         SendMessageUseCase(getIt.get<HomeRepository>()));
+
+    getIt.registerSingleton<ConsaltantDoctorRepository>(
+        ConsaltantDoctorRepoImpl());
   }
 }

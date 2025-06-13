@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:medical_app/core/errors/faliure.dart';
 import 'package:medical_app/core/utils/lottie_assets.dart';
@@ -66,6 +68,7 @@ class ServerFailure extends Failure {
             errMessage: 'النظام غير متاح. يرجى المحاولة مرة أخرى لاحقًا.');
 
       default:
+        log(json.toString());
         return ServerFailure(
             errMessage: 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.');
     }

@@ -29,6 +29,7 @@ class _TimeWidgetState extends State<TimeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    widget.onTimeSelected(selectedTime);
     return CupertinoButton(
       onPressed: () => _showTimePicker(context),
       child: CustomBorder(

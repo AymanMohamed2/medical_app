@@ -15,4 +15,10 @@ class HiveAuthDatasource extends BaseAuthLocaleDatasource {
     var box = await Hive.openBox(HiveBoxes.user);
     await box.put(HiveBoxes.user, userModel);
   }
+
+  @override
+  Future<void> deleteUser() async {
+    var box = Hive.box(HiveBoxes.user);
+    return box.delete(HiveBoxes.user);
+  }
 }

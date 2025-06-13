@@ -10,6 +10,29 @@ abstract class AppStyles {
     fontWeight: FontWeight.w400,
     height: 0,
   );
+  static TextStyle bold10(BuildContext context) {
+    return TextStyle(
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Poppins',
+      fontSize: getResponsiveFontSize(context, fontSize: 10),
+    );
+  }
+
+  static TextStyle bold9(BuildContext context) {
+    return TextStyle(
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Poppins',
+      fontSize: getResponsiveFontSize(context, fontSize: 9),
+    );
+  }
+
+  static TextStyle bold11(BuildContext context) {
+    return TextStyle(
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Poppins',
+      fontSize: getResponsiveFontSize(context, fontSize: 11),
+    );
+  }
 
   static const TextStyle styleBold20 = TextStyle(
     color: Colors.white,
