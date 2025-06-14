@@ -4,6 +4,7 @@ import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/widgets/custom_profile_image.dart';
 import 'package:medical_app/features/doctor_home/data/models/base_doctors_consaltant_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DoctorAlertMessage extends StatelessWidget {
   const DoctorAlertMessage({
@@ -67,7 +68,9 @@ class DoctorAlertMessage extends StatelessWidget {
                     onPressed: isNowAfterTarget(
                             doctorConsaltantModel.date.toString(),
                             doctorConsaltantModel.meetingTime!)
-                        ? () {}
+                        ? () {
+                            launchUrlQuick(doctorConsaltantModel.meetingLink!);
+                          }
                         : null,
                     icon: Icon(
                       Icons.launch,
@@ -84,6 +87,15 @@ class DoctorAlertMessage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> launchUrlQuick(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'لا يمكن فتح الرابط: $url';
+    }
   }
 
   String getSubString(DoctorConsaltantModel model) {
