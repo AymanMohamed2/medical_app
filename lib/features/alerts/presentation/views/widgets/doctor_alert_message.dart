@@ -105,7 +105,7 @@ class DoctorAlertMessage extends StatelessWidget {
       case ConsultantStatusEnum.pending:
         return 'pending';
       case ConsultantStatusEnum.rejected:
-        return 'Your Session has been rejected by Dr. ${model.doctorName}';
+        return 'Your Session has been rejected by Dr. ${model.doctorName} at ${model.date.year}-${model.date.month}-${model.date.day}, ${model.meetingTime}';
     }
   }
 

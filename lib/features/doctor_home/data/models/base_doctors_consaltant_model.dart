@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:medical_app/core/enums/consultant_status_enum.dart';
@@ -67,8 +69,11 @@ class DoctorConsaltantModel {
         }
       }
     } else if (value is DateTime) {
+      log(value.toString());
       return value;
     } else {
+      log(value.toString());
+
       throw Exception('نوع تاريخ غير مدعوم: $value');
     }
   }
