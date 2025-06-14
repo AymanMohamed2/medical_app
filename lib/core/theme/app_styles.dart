@@ -18,6 +18,13 @@ abstract class AppStyles {
     );
   }
 
+  static TextStyle light10(BuildContext context) {
+    return TextStyle(
+      fontWeight: FontWeight.w300,
+      fontSize: getResponsiveFontSize(context, fontSize: 10),
+    );
+  }
+
   static TextStyle bold9(BuildContext context) {
     return TextStyle(
       fontWeight: FontWeight.bold,
