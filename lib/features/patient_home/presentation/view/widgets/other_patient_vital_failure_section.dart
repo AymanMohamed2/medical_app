@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/widgets/custom_vital_failure_container.dart';
+import 'package:medical_app/features/patient_home/data/models/fetch_vitals_request_model.dart';
 import 'package:medical_app/features/patient_home/presentation/view_model/patient_vitals_cubit/fetch_patient_vitals_cubit.dart';
 
 class OtherPatientVitalFailureSection extends StatelessWidget {
@@ -19,7 +20,10 @@ class OtherPatientVitalFailureSection extends StatelessWidget {
             unit: AppStrings.tempUnit,
             color: AppColors.darkRedColor,
             onPressed: () {
-              context.read<FetchPatientVitalsCubit>().fetchPatientVitals();
+              final request = FetchVitalsRequestModel(day: 1, hour: 2);
+              context
+                  .read<FetchPatientVitalsCubit>()
+                  .fetchPatientVitals(request);
             },
             backColor: AppColors.lightSemon,
           ),
@@ -31,7 +35,11 @@ class OtherPatientVitalFailureSection extends StatelessWidget {
             unit: AppStrings.oxygenUnit,
             color: AppColors.darkGreen,
             onPressed: () {
-              context.read<FetchPatientVitalsCubit>().fetchPatientVitals();
+              final request = FetchVitalsRequestModel(day: 1, hour: 2);
+
+              context
+                  .read<FetchPatientVitalsCubit>()
+                  .fetchPatientVitals(request);
             },
             backColor: AppColors.lightGreen,
           ),

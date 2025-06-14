@@ -3,6 +3,7 @@ import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/utils/assets.dart';
+import 'package:medical_app/core/utils/get_user_data.dart';
 
 class WelcomePannerWidget extends StatelessWidget {
   const WelcomePannerWidget({super.key});
@@ -32,7 +33,7 @@ class WelcomePannerWidget extends StatelessWidget {
                         .copyWith(color: AppColors.white),
                   ),
                   Text(
-                    'Evelyn Harper',
+                    GetUserData.user!.name ?? '',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: AppStyles.semiBold20(context)

@@ -1,24 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medical_app/core/functions/show_alert_dialog.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/utils/app_validators.dart';
 import 'package:medical_app/core/widgets/custom_button.dart';
 import 'package:medical_app/core/widgets/custom_text_form_field.dart';
-import 'package:medical_app/features/auth/presentation/view/widgets/upload_license_widget.dart';
+import 'package:medical_app/features/auth/presentation/view/widgets/custom_upload_photo.dart';
+import 'package:medical_app/features/auth/presentation/view/widgets/upload_photo_from.dart';
+import 'package:medical_app/features/auth/presentation/view_model/pick_image_cubit/pick_image_cubit.dart';
 
-class CompleateDataSection extends StatelessWidget {
+class CompleateDataSection extends StatefulWidget {
   const CompleateDataSection({
     super.key,
     required this.isVisible,
     required this.onPressed,
     required this.isDoctor,
-    required this.formKey,
   });
   final bool isVisible;
   final bool isDoctor;
 
   final Function()? onPressed;
-  final GlobalKey<FormState> formKey;
+
+  @override
+  State<CompleateDataSection> createState() => _CompleateDataSectionState();
+}
+
+class _CompleateDataSectionState extends State<CompleateDataSection> {
+  late GlobalKey<CustomUploadPhotoWidgetState> photoKey;
+  late GlobalKey<FormState> formKey;
+
+  @override
+  void initState() {
+    photoKey = GlobalKey<CustomUploadPhotoWidgetState>();
+    formKey = GlobalKey<FormState>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -27,7 +45,7 @@ class CompleateDataSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Visibility(
-            visible: !isDoctor,
+            visible: !widget.isDoctor,
             child: Padding(
               padding: const EdgeInsets.only(top: 40),
               child: CustomTextField(
@@ -37,7 +55,7 @@ class CompleateDataSection extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: !isDoctor,
+            visible: !widget.isDoctor,
             child: Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 25),
               child: CustomTextField(
@@ -46,7 +64,7 @@ class CompleateDataSection extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: isDoctor,
+            visible: widget.isDoctor,
             child: Padding(
               padding: const EdgeInsets.only(top: 40),
               child: CustomTextField(
@@ -56,16 +74,30 @@ class CompleateDataSection extends StatelessWidget {
             ),
           ),
           Visibility(
-              visible: isDoctor,
+              visible: widget.isDoctor,
               child: Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 25),
-                child: UploadLicenseWidget(),
+                child: CustomUploadPhotoidget(
+                  key: photoKey,
+                  imageAspectRatio: 1.8 / 1,
+                  isVisible: false,
+                  onTap: () async {
+                    showAlertDialog(
+                      context,
+                      child: BlocProvider.value(
+                        value: context.read<PickImageCubit>(),
+                        child: const UploadPhotoFrom(),
+                      ),
+                    );
+                  },
+                  width: double.infinity,
+                ),
               )),
           CustomButton(
             text: 'Finish',
             textStyle:
                 AppStyles.medium24(context).copyWith(color: Colors.white),
-            onPressed: onPressed,
+            onPressed: () {},
           ),
         ],
       ),

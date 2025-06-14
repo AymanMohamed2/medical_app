@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class DoctorModel {
   final String name;
   final String imageUrl;
@@ -11,6 +13,8 @@ class DoctorModel {
   });
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) {
+    log(json['name'].toString());
+    log(json['uId'].toString());
     return DoctorModel(
       name: json['name'],
       imageUrl: json['imageUrl'] ??

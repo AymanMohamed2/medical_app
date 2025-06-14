@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medical_app/core/functions/logout_method.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
+import 'package:medical_app/features/doctor_home/data/models/base_doctors_consaltant_model.dart';
 import 'package:medical_app/features/doctor_home/presentation/view/schedule_view.dart';
+import 'package:medical_app/features/doctor_home/presentation/view_model/fetch_consaltants_cubit/fetch_consaltants_cubit.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -10,12 +14,15 @@ class CustomAppBar extends StatelessWidget {
     this.onPressed,
     this.isVisible = false,
     this.isBackButtonVisible = true,
+    this.isLogoutVisible = false,
+    this.model,
   });
   final String title;
   final void Function()? onPressed;
   final bool? isVisible;
   final bool isBackButtonVisible;
-
+  final bool isLogoutVisible;
+  final DoctorConsaltantModel? model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,6 +59,18 @@ class CustomAppBar extends StatelessWidget {
             ),
             Spacer(),
             Visibility(
+              visible: isLogoutVisible,
+              child: IconButton(
+                onPressed: () {
+                  logoutMethod(context);
+                },
+                icon: Icon(
+                  Icons.logout,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+            ),
+            Visibility(
               visible: isVisible!,
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -62,7 +81,12 @@ class CustomAppBar extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const ScheduleView(),
+                        builder: (BuildContext acontext) => BlocProvider.value(
+                          value: context.read<FetchConsaltantsCubit>(),
+                          child: ScheduleView(
+                            model: model!,
+                          ),
+                        ),
                       ),
                     );
                   },

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
+import 'package:medical_app/features/patient_home/data/models/patient_vitals_model/base_patient_vitals_model.dart';
+import 'package:medical_app/features/patient_home/presentation/view_model/patient_vitals_cubit/fetch_patient_vitals_cubit.dart';
 
 class ECGTable extends StatelessWidget {
   const ECGTable({super.key});
 
   @override
   Widget build(BuildContext context) {
+    BasePatientVitalsModel data =
+        context.read<FetchPatientVitalsCubit>().basePatientVitalsModel!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
@@ -55,10 +60,15 @@ class ECGTable extends StatelessWidget {
                 },
                 children: [
                   _buildRow(["((ECG))", "ONSET", "OFFSET", "PEAK"]),
-                  _buildRow(["P", "X", "X", "X"]),
-                  _buildQRSRow(),
-                  _buildRow(["T", "X", "x", "X"]),
-                  _buildRow(["R", "X", "X", "X"]),
+                  _buildRow([
+                    "P",
+                    data.p[0],
+                    data.p[1],
+                    data.p[2],
+                  ]),
+                  _buildQRSRow(data),
+                  _buildRow(["T", data.t[0], data.t[1], data.t[2]]),
+                  _buildRow(["R", data.r[0], data.r[1], data.r[2]]),
                 ],
               ),
             ),
@@ -80,20 +90,20 @@ class ECGTable extends StatelessWidget {
     );
   }
 
-  TableRow _buildQRSRow() {
+  TableRow _buildQRSRow(BasePatientVitalsModel data) {
     return TableRow(
       children: [
         _buildCell(
           "QRS",
         ),
-        _buildCell("X"),
-        _buildCell("X"),
-        _buildStackedQRSCell(),
+        _buildCell(data.qrs[0]),
+        _buildCell(data.qrs[1]),
+        _buildStackedQRSCell(data),
       ],
     );
   }
 
-  Widget _buildStackedQRSCell() {
+  Widget _buildStackedQRSCell(BasePatientVitalsModel data) {
     return Table(
       border: TableBorder(
         horizontalInside: BorderSide(
@@ -108,8 +118,8 @@ class ECGTable extends StatelessWidget {
         1: FlexColumnWidth(1),
       },
       children: [
-        _buildHeaderRow(["Q", "x"]),
-        _buildRow(["S", "X"]),
+        _buildHeaderRow(["Q", data.qPeak!]),
+        _buildRow(["S", data.sPeak!]),
       ],
     );
   }

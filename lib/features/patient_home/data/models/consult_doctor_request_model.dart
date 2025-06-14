@@ -6,12 +6,16 @@ class ConsultDoctorRequestModel {
   final String doctorId;
   final String date;
   final EcgStatusEnum ecgStatusEnum;
+  final String doctorImage;
+  final String doctorName;
   final ConsultantStatusEnum consultantStatus;
 
   ConsultDoctorRequestModel({
     required this.doctorId,
     required this.consultantStatus,
     required this.date,
+    required this.doctorImage,
+    required this.doctorName,
     required this.ecgStatusEnum,
   });
   Map<String, dynamic> toJson() => {
@@ -24,5 +28,10 @@ class ConsultDoctorRequestModel {
         'ecgStatusEnum': ecgStatusEnum.name,
         'medicalCondidion': GetUserData.user!.medicalCondidion,
         'consultantStatus': consultantStatus.name,
+        'meetingLink': '',
+        'time': DateTime.now(),
+        'meetingTime': '',
+        'doctorImage': doctorImage,
+        'doctorName': doctorName
       };
 }

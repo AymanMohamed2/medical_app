@@ -58,6 +58,7 @@ class UserModel {
       UserModel(
           isCompeleteData: json['isCompeleteData'],
           medicalCondidion: json['medicalCondidion'],
+          name: json['name'],
           uId: user.uid,
           email: json['email'],
           age: json['age'],

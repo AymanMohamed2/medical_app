@@ -61,6 +61,8 @@ class CustomDoctorCard extends StatelessWidget {
                           : () {
                               ConsultDoctorRequestModel model =
                                   ConsultDoctorRequestModel(
+                                      doctorName: doctorModel.name,
+                                      doctorImage: doctorModel.imageUrl,
                                       doctorId: doctorModel.id,
                                       consultantStatus:
                                           ConsultantStatusEnum.pending,
