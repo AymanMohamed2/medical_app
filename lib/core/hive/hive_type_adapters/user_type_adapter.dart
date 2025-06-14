@@ -17,6 +17,7 @@ class UserModelTypeAdapter extends TypeAdapter<UserModel> {
       age: reader.readString(),
       medicalCondidion: reader.readString(),
       image: reader.readString(),
+      speciality: reader.readString(),
     );
   }
 
@@ -35,5 +36,6 @@ class UserModelTypeAdapter extends TypeAdapter<UserModel> {
     writer.writeString(obj.age ?? '');
     writer.writeString(obj.medicalCondidion ?? '');
     writer.writeString(obj.image);
+    writer.writeString(obj.speciality ?? '');
   }
 }

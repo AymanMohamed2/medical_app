@@ -18,6 +18,7 @@ abstract class AppStrings {
   static const String camera = '📷 Camera';
   static const String gallery = '🖼️ Gallery';
   static const String noAlerts = 'No alerts';
+  static const String speciality = 'Speciality';
 
   static const String enterMeetingLink = 'Enter meeting link';
   static const String enterPass = 'Enter your password';

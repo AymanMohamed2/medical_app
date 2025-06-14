@@ -21,7 +21,7 @@ class DoctorProfileInfoSection extends StatelessWidget {
           Divider(color: AppColors.primaryColor),
           CustomUserInfoWidget(
             title: AppStrings.field,
-            value: 'Neurologist',
+            value: GetUserData.user!.speciality!,
           ),
           Divider(color: AppColors.primaryColor),
         ],

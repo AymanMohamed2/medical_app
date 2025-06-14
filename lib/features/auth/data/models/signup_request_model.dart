@@ -13,6 +13,7 @@ class SignupRequestModel {
   final String? medicalCondition;
   final bool isCompleteData;
   final String? age;
+  final String? speciality;
   XFile? profileImage;
 
   SignupRequestModel(
@@ -24,6 +25,7 @@ class SignupRequestModel {
       this.profileImage,
       required this.isCompleteData,
       this.signupMethod,
+      this.speciality,
       this.userRole,
       this.medicalCondition,
       this.confirmPassword});

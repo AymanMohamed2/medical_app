@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical_app/core/enums/signup_method_enum.dart';
 import 'package:medical_app/core/enums/user_role_enum.dart';
 import 'package:medical_app/core/functions.dart';
+import 'package:medical_app/core/strategies/complete_data_factory.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/strategies/auth_navigation_factory.dart';
 import 'package:medical_app/features/auth/presentation/view/widgets/custom_upload_photo.dart';
@@ -81,7 +82,12 @@ class _DoctorSignUpViewBodyState extends State<DoctorSignUpViewBody> {
 
   void doctorSignupListener(context, state) {
     if (state is SignupSuccess) {
-      AuthNavigationFactory.create(state.user).executeNavigation(context);
+      if (state.user.isCompeleteData) {
+        AuthNavigationFactory.create(state.user).executeNavigation(context);
+      } else {
+        CompleteDataNavigationFactory.create(state.user)
+            .excuteNavigation(context);
+      }
     } else if (state is SignupError) {
       customErrorSnakeBar(context, state.failure);
     }

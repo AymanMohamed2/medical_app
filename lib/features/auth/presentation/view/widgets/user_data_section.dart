@@ -115,6 +115,23 @@ class UserDataSection extends StatelessWidget {
               ],
             ),
           ),
+
+          Visibility(
+            visible: isDoctor,
+            child: Column(
+              children: [
+                CustomTextField(
+                  validator: (value) {
+                    return AppValidators.generalValidator(
+                        value, AppStrings.speciality);
+                  },
+                  onChanged: context.read<SignupCubit>().setSpeciality,
+                  hintText: AppStrings.speciality,
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+          ),
           StatefulBuilder(
             builder: (context, setState) => CustomTextField(
               validator: (value) {

@@ -16,6 +16,7 @@ class UserModel {
   final String? medicalCondidion;
   final String? age;
   bool isCompeleteData;
+  final String? speciality;
   UserModel(
       {this.name,
       this.email,
@@ -28,6 +29,7 @@ class UserModel {
       required this.isCompeleteData,
       this.uId,
       this.medicalCondidion,
+      this.speciality,
       this.userRole});
 
   factory UserModel.fromFirebaseUser(
@@ -53,6 +55,7 @@ class UserModel {
           name: signupRequestModel.name,
           hospital: signupRequestModel.hospital,
           signupMethod: signupRequestModel.signupMethod,
+          speciality: signupRequestModel.speciality,
           userRole: signupRequestModel.userRole);
 
   factory UserModel.fromFirebaseJson(
@@ -65,11 +68,13 @@ class UserModel {
           email: json['email'],
           image: json['image'],
           age: json['age'],
+          speciality: json['speciality'],
           hospital: json['hospital'],
           signupMethod: getSignupMethod(json['signupMethod']),
           userRole: json['userRole'] == 'patient'
               ? UserRoleEnum.patient
               : UserRoleEnum.doctor);
+
   Map<String, dynamic> toJson() => {
         'medicalCondidion': medicalCondidion,
         'uId': uId,
@@ -80,7 +85,8 @@ class UserModel {
         'signupMethod': signupMethod?.name,
         'userRole': userRole?.name,
         'age': age,
-        'image': image
+        'image': image,
+        'speciality': speciality
       };
 
   static AuthMethodEnum getSignupMethod(String method) {

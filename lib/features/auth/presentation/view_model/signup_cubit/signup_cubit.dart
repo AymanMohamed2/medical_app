@@ -16,6 +16,7 @@ class SignupCubit extends Cubit<SignupState> {
   String? medicalCondidion;
   UserRoleEnum? userRoleEnum;
   String? age;
+  String? speciality;
   XFile? profileImage;
 
   final AuthRepository authRepository;
@@ -39,10 +40,12 @@ class SignupCubit extends Cubit<SignupState> {
         age: age,
         profileImage: profileImage,
         medicalCondition: medicalCondidion,
+        speciality: speciality,
         confirmPassword: confirmPassword);
   }
 
   void setEmail(String email) => this.email = email;
+  void setSpeciality(String speciality) => this.speciality = speciality;
   void setPassword(String password) => this.password = password;
   void setConfirmPassword(String confirmPassword) =>
       this.confirmPassword = confirmPassword;
