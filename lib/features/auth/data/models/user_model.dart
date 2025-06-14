@@ -8,7 +8,7 @@ class UserModel {
   final String? email;
   final String? password;
   final String? hospital;
-  final String image;
+  String image;
   final String? confirmPassword;
   final AuthMethodEnum? signupMethod;
   final UserRoleEnum? userRole;
@@ -38,6 +38,7 @@ class UserModel {
           email: user.email,
           age: signupRequestModel.age,
           name: user.displayName,
+          image: user.photoURL ?? '',
           signupMethod: signupRequestModel.signupMethod,
           userRole: signupRequestModel.userRole);
   factory UserModel.fromSignupRequestModel(
@@ -54,13 +55,15 @@ class UserModel {
           signupMethod: signupRequestModel.signupMethod,
           userRole: signupRequestModel.userRole);
 
-  factory UserModel.fromFirebaseJson(Map<String, dynamic> json, User user) =>
+  factory UserModel.fromFirebaseJson(
+          Map<String, dynamic> json, String userId) =>
       UserModel(
           isCompeleteData: json['isCompeleteData'],
           medicalCondidion: json['medicalCondidion'],
           name: json['name'],
-          uId: user.uid,
+          uId: userId,
           email: json['email'],
+          image: json['image'],
           age: json['age'],
           hospital: json['hospital'],
           signupMethod: getSignupMethod(json['signupMethod']),
@@ -77,6 +80,7 @@ class UserModel {
         'signupMethod': signupMethod?.name,
         'userRole': userRole?.name,
         'age': age,
+        'image': image
       };
 
   static AuthMethodEnum getSignupMethod(String method) {

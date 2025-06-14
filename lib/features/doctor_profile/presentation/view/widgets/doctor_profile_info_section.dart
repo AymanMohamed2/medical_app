@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
+import 'package:medical_app/core/utils/get_user_data.dart';
 import 'package:medical_app/features/patient_profile/presentation/view/widgets/custom_user_info_widget.dart';
 
 class DoctorProfileInfoSection extends StatelessWidget {
@@ -15,7 +16,7 @@ class DoctorProfileInfoSection extends StatelessWidget {
         children: [
           CustomUserInfoWidget(
             title: AppStrings.name,
-            value: 'Doctor Name',
+            value: GetUserData.user!.name!,
           ),
           Divider(color: AppColors.primaryColor),
           CustomUserInfoWidget(

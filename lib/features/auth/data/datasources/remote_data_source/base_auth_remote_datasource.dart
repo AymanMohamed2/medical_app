@@ -1,3 +1,4 @@
+import 'package:medical_app/features/auth/data/models/complete_data_request_model.dart';
 import 'package:medical_app/features/auth/data/models/login_request_model.dart';
 import 'package:medical_app/features/auth/data/models/signup_request_model.dart';
 import 'package:medical_app/features/auth/data/models/user_model.dart';
@@ -12,4 +13,5 @@ abstract class BaseAuthRemoteDataSource {
       LoginRequestModel loginRequestModel);
   Future<UserModel> loginWithGoogle(LoginRequestModel loginRequestModel);
   Future<UserModel> loginWithFacebook(LoginRequestModel loginRequestModel);
+  Future<UserModel> completeData(CompleteDataRequestModel request);
 }
