@@ -10,6 +10,19 @@ abstract class AppStyles {
     fontWeight: FontWeight.w400,
     height: 0,
   );
+  static TextStyle bold9(BuildContext context) {
+    return TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: getResponsiveFontSize(context, fontSize: 9),
+    );
+  }
+
+  static TextStyle light10(BuildContext context) {
+    return TextStyle(
+      fontWeight: FontWeight.w300,
+      fontSize: getResponsiveFontSize(context, fontSize: 10),
+    );
+  }
 
   static const TextStyle styleBold20 = TextStyle(
     color: Colors.white,
