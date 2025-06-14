@@ -19,6 +19,7 @@ class IamgeNameGmailSection extends StatelessWidget {
       children: [
         SizedBox(width: 26),
         CustomProfileImage(
+          circurlarRadius: 100,
           radius: 55,
           imageUrl: imageUrl,
         ),

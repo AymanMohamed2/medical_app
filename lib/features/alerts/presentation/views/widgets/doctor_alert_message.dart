@@ -31,6 +31,7 @@ class DoctorAlertMessage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 17),
             child: CustomProfileImage(
+              circurlarRadius: 50,
               radius: 25,
               imageUrl: doctorConsaltantModel.doctorImage,
             ),
@@ -90,12 +91,9 @@ class DoctorAlertMessage extends StatelessWidget {
   }
 
   Future<void> launchUrlQuick(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      throw 'لا يمكن فتح الرابط: $url';
-    }
+    String fixedUrl = url.startsWith('http') ? url : 'https://$url';
+    final uri = Uri.parse(fixedUrl);
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   String getSubString(DoctorConsaltantModel model) {

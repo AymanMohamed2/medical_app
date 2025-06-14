@@ -17,6 +17,7 @@ class DoctorProfileViewBody extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
             child: CustomAppBar(
+                isBackButtonVisible: false,
                 isLogoutVisible: true,
                 isVisible: false,
                 title: AppStrings.appBarProfile,

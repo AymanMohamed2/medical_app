@@ -8,26 +8,25 @@ class CustomProfileImage extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.radius,
+    required this.circurlarRadius,
   });
   final String imageUrl;
   final double radius;
-
+  final double circurlarRadius;
   @override
   Widget build(BuildContext context) {
     return CustomBorder(
       padding: EdgeInsets.zero,
       radius: radius,
+      shape: BoxShape.circle,
       borderClolor: AppColors.primaryColor.withAlpha(90),
-      child: CircleAvatar(
-        backgroundColor: AppColors.searchFillGrayColor,
-        radius: radius,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(radius),
-          child: SizedBox(
-            height: radius * 2,
-            child: CustomCashedNetworkImage(
-              imageUrl: imageUrl,
-            ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: SizedBox(
+          height: circurlarRadius,
+          width: circurlarRadius,
+          child: CustomCashedNetworkImage(
+            imageUrl: imageUrl,
           ),
         ),
       ),

@@ -148,8 +148,8 @@ class UserDataSection extends StatelessWidget {
                 StatefulBuilder(
                   builder: (context, setState) => CustomTextField(
                     validator: (value) {
-                      return AppValidators.generalValidator(
-                          value, AppStrings.password);
+                      return AppValidators.confirmPasswordValidator(
+                          value, context.read<SignupCubit>().password);
                     },
                     onChanged: context.read<SignupCubit>().setConfirmPassword,
                     obscureText: isActive,

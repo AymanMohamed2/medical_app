@@ -20,6 +20,16 @@ class AppValidators {
     return null;
   }
 
+  static String? confirmPasswordValidator(
+      String? confirmPassword, String? firstPassword) {
+    if (confirmPassword == null || confirmPassword.isEmpty) {
+      return 'Please enter an password';
+    } else if (confirmPassword != firstPassword) {
+      return 'Password does not match';
+    }
+    return null;
+  }
+
   static String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'This field is required';
