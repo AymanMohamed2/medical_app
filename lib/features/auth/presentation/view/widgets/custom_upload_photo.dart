@@ -17,6 +17,11 @@ class CustomUploadPhotoidget extends StatefulWidget {
     this.isVisible = true,
     this.height,
     this.imageAspectRatio = 1,
+    this.shape,
+    this.splashRadius,
+    this.pickImageWidget,
+    this.borderRadius,
+    this.virticalSpace,
   });
 
   final void Function()? onTap;
@@ -24,7 +29,11 @@ class CustomUploadPhotoidget extends StatefulWidget {
   final bool? isVisible;
   final double? height;
   final double imageAspectRatio;
-
+  final BoxShape? shape;
+  final double? splashRadius;
+  final Widget? pickImageWidget;
+  final BorderRadiusGeometry? borderRadius;
+  final double? virticalSpace;
   @override
   State<CustomUploadPhotoidget> createState() => CustomUploadPhotoWidgetState();
 }
@@ -53,21 +62,28 @@ class CustomUploadPhotoWidgetState extends State<CustomUploadPhotoidget> {
               child: AspectRatio(
                 aspectRatio: widget.imageAspectRatio,
                 child: CustomInkwellWidget(
+                  radius: widget.splashRadius,
                   onTap: () {
                     widget.onTap!();
                   }, // Don't reset validation on tap
                   child: CustomBorder(
+                    shape: widget.shape,
                     padding: hasImage
                         ? EdgeInsets.zero
-                        : const EdgeInsets.symmetric(vertical: 55),
+                        : EdgeInsets.symmetric(
+                            vertical: widget.virticalSpace ?? 55),
                     borderClolor: _isValid
                         ? AppColors.primaryColor // Default border color
                         : AppColors.red, // Show red border on validation fail
                     child: hasImage
-                        ? ImageWidget(
-                            image: context.read<PickImageCubit>().file!.path,
+                        ? ClipRRect(
+                            borderRadius:
+                                widget.borderRadius ?? BorderRadius.zero,
+                            child: ImageWidget(
+                              image: context.read<PickImageCubit>().file!.path,
+                            ),
                           )
-                        : const PickImageWidget(),
+                        : widget.pickImageWidget ?? const PickImageWidget(),
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:medical_app/core/enums/signup_method_enum.dart';
 import 'package:medical_app/core/enums/user_role_enum.dart';
 import 'package:medical_app/features/auth/data/models/signup_request_model.dart';
@@ -15,6 +16,7 @@ class SignupCubit extends Cubit<SignupState> {
   String? medicalCondidion;
   UserRoleEnum? userRoleEnum;
   String? age;
+  XFile? profileImage;
 
   final AuthRepository authRepository;
   Future<void> signUp(AuthMethodEnum signupMethod, bool isCompleteData) async {
@@ -35,6 +37,7 @@ class SignupCubit extends Cubit<SignupState> {
         hospital: hospital,
         userRole: userRoleEnum,
         age: age,
+        profileImage: profileImage,
         medicalCondition: medicalCondidion,
         confirmPassword: confirmPassword);
   }

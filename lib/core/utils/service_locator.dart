@@ -1,14 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:medical_app/core/networking/api_service.dart';
 import 'package:medical_app/core/services/gemini_services.dart';
+import 'package:medical_app/core/services/image_picker_service/pick_image_from_camera.dart';
+import 'package:medical_app/core/services/image_picker_service/pick_image_from_gallery.dart';
 import 'package:medical_app/core/strategies/auth_strategies/login_strategy/login_strategy_factory.dart';
+import 'package:medical_app/core/usecases/pick_image_usecase.dart';
+import 'package:medical_app/core/utils/permession_handler.dart';
 import 'package:medical_app/features/auth/data/datasources/local_data_source/base_auth_locale_datasource.dart';
 import 'package:medical_app/features/auth/data/datasources/local_data_source/hive_auth_datasource.dart';
 import 'package:medical_app/features/auth/data/datasources/remote_data_source/base_auth_remote_datasource.dart';
 import 'package:medical_app/features/auth/data/datasources/remote_data_source/firebase_auth_remote_data_source.dart';
 import 'package:medical_app/features/auth/data/repository/auth_repository.dart';
 import 'package:medical_app/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:medical_app/features/auth/data/repository/image_repo_impl.dart';
+import 'package:medical_app/features/auth/data/repository/image_repository.dart';
 import 'package:medical_app/features/chat/data/datasources/base_home_data_source.dart';
 import 'package:medical_app/features/chat/data/datasources/remote_data_source.dart';
 import 'package:medical_app/features/chat/data/repository/home_repo_impl.dart';
@@ -73,5 +80,19 @@ class ServiceLocator {
 
     getIt.registerSingleton<ConsaltantDoctorRepository>(
         ConsaltantDoctorRepoImpl());
+    getIt.registerSingleton<PermessionHandler>(PermessionHandler());
+    getIt.registerSingleton<ImagePicker>(ImagePicker());
+
+    getIt.registerSingleton<PickImageFromGallery>(PickImageFromGallery(
+        permessionHandler: getIt.get<PermessionHandler>(),
+        picker: getIt.get<ImagePicker>()));
+
+    getIt.registerSingleton<PickImageFromCamera>(PickImageFromCamera(
+        permessionHandler: getIt.get<PermessionHandler>(),
+        picker: getIt.get<ImagePicker>()));
+
+    getIt.registerSingleton<ImageRepository>(ImageRepoImpl());
+    getIt.registerSingleton<PickImageUsecase>(
+        PickImageUsecase(shopRepository: getIt.get<ImageRepository>()));
   }
 }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medical_app/core/functions/show_alert_dialog.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/utils/app_validators.dart';
 import 'package:medical_app/core/widgets/custom_button.dart';
 import 'package:medical_app/core/widgets/custom_text_form_field.dart';
-import 'package:medical_app/features/auth/presentation/view/widgets/upload_license_widget.dart';
+import 'package:medical_app/features/auth/presentation/view/widgets/custom_upload_photo.dart';
+import 'package:medical_app/features/auth/presentation/view/widgets/upload_photo_from.dart';
+import 'package:medical_app/features/auth/presentation/view_model/pick_image_cubit/pick_image_cubit.dart';
 import 'package:medical_app/features/auth/presentation/view_model/signup_cubit/signup_cubit.dart';
 
 class UserDataSection extends StatelessWidget {
@@ -18,6 +21,7 @@ class UserDataSection extends StatelessWidget {
     required this.title,
     required this.isDoctor,
     required this.formKey,
+    required this.profileKey,
   });
   final bool isVisible;
   final bool isDoctor;
@@ -25,6 +29,8 @@ class UserDataSection extends StatelessWidget {
   final Function()? onPressed;
   final String title;
   final GlobalKey<FormState> formKey;
+  final GlobalKey<CustomUploadPhotoWidgetState> profileKey;
+
   @override
   Widget build(BuildContext context) {
     bool isActive = true;
@@ -35,6 +41,34 @@ class UserDataSection extends StatelessWidget {
         children: [
           Text(title, style: AppStyles.bold20(context)),
           SizedBox(height: 15),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 25),
+            child: CustomUploadPhotoidget(
+              virticalSpace: 0,
+              borderRadius: BorderRadius.circular(100),
+              pickImageWidget: Icon(
+                Icons.upload_file,
+                color: AppColors.primaryColor,
+                size: 20,
+              ),
+              splashRadius: 200,
+              height: 100,
+              shape: BoxShape.circle,
+              key: profileKey,
+              imageAspectRatio: 1.8 / 1,
+              isVisible: false,
+              onTap: () async {
+                showAlertDialog(
+                  context,
+                  child: BlocProvider.value(
+                    value: context.read<PickImageCubit>(),
+                    child: const UploadPhotoFrom(),
+                  ),
+                );
+              },
+              width: 100,
+            ),
+          ),
           CustomTextField(
             validator: (value) {
               return AppValidators.generalValidator(value, AppStrings.name);
@@ -42,18 +76,21 @@ class UserDataSection extends StatelessWidget {
             hintText: AppStrings.enterName,
             onChanged: context.read<SignupCubit>().setName,
           ),
-          SizedBox(height: 20),
-          CustomTextField(
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(3),
-            ],
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              return AppValidators.generalValidator(value, AppStrings.age);
-            },
-            hintText: AppStrings.enterAge,
-            onChanged: context.read<SignupCubit>().setAge,
+          Visibility(visible: !isDoctor, child: SizedBox(height: 20)),
+          Visibility(
+            visible: !isDoctor,
+            child: CustomTextField(
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(3),
+              ],
+              keyboardType: TextInputType.number,
+              validator: (value) {
+                return AppValidators.generalValidator(value, AppStrings.age);
+              },
+              hintText: AppStrings.enterAge,
+              onChanged: context.read<SignupCubit>().setAge,
+            ),
           ),
           SizedBox(height: 20),
           CustomTextField(
@@ -148,7 +185,26 @@ class UserDataSection extends StatelessWidget {
               ],
             ),
           ),
-          Visibility(visible: isDoctor, child: UploadLicenseWidget()),
+          // Visibility(
+          //     visible: isDoctor,
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(top: 20, bottom: 25),
+          //       child: CustomUploadPhotoidget(
+          //         key: photoKey,
+          //         imageAspectRatio: 1.8 / 1,
+          //         isVisible: false,
+          //         onTap: () async {
+          //           showAlertDialog(
+          //             context,
+          //             child: BlocProvider.value(
+          //               value: context.read<PickImageCubit>(),
+          //               child: const UploadPhotoFrom(),
+          //             ),
+          //           );
+          //         },
+          //         width: double.infinity,
+          //       ),
+          //     )),
           SizedBox(height: 20),
           CustomButton(
             text: isVisible ? AppStrings.signUp : AppStrings.login,

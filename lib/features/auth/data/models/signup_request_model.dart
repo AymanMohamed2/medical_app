@@ -1,3 +1,4 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:medical_app/core/enums/signup_method_enum.dart';
 import 'package:medical_app/core/enums/user_role_enum.dart';
 
@@ -12,6 +13,7 @@ class SignupRequestModel {
   final String? medicalCondition;
   final bool isCompleteData;
   final String? age;
+  XFile? profileImage;
 
   SignupRequestModel(
       {this.email,
@@ -19,6 +21,7 @@ class SignupRequestModel {
       this.name,
       this.hospital,
       this.age,
+      this.profileImage,
       required this.isCompleteData,
       this.signupMethod,
       this.userRole,

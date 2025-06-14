@@ -16,7 +16,7 @@ class PickImageCubit extends Cubit<PickImageState> {
     result.fold((failure) => emit(PickImageFailure(failure)), (pickedImage) {
       if (pickedImage != null) file = pickedImage;
 
-      emit(PickImageSuccess());
+      emit(PickImageSuccess(file: pickedImage));
     });
   }
 }

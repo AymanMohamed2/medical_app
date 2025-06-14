@@ -7,6 +7,7 @@ import 'package:medical_app/core/utils/get_user_data.dart';
 import 'package:medical_app/features/auth/data/datasources/local_data_source/base_auth_locale_datasource.dart';
 import 'package:medical_app/features/auth/data/datasources/remote_data_source/base_auth_remote_datasource.dart';
 import 'package:medical_app/core/strategies/auth_strategies/signup_strategy/signup_factory.dart';
+import 'package:medical_app/features/auth/data/models/complete_data_request_model.dart';
 import 'package:medical_app/features/auth/data/models/login_request_model.dart';
 import 'package:medical_app/features/auth/data/models/signup_request_model.dart';
 import 'package:medical_app/features/auth/data/models/user_model.dart';
@@ -55,6 +56,19 @@ class AuthRepositoryImpl extends AuthRepository {
       return Left(ServerFailure(errMessage: e.message));
     } catch (e) {
       return Left(ServerFailure(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> completeData(
+      CompleteDataRequestModel request) async {
+    try {
+      UserModel user = await authRemoteDataSource.completeData(request);
+      await baseAuthLocaleDatasource.saveUser(user);
+      await GetUserData.init();
+      return right(user);
+    } on Exception catch (e) {
+      return left(ServerFailure(errMessage: e.toString()));
     }
   }
 }

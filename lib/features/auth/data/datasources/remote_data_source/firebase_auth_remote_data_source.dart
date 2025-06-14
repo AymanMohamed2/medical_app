@@ -1,11 +1,19 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:medical_app/core/exceptions/fire_store_auth_exception.dart';
 import 'package:medical_app/core/exceptions/firebase_auth_exception.dart';
 import 'package:medical_app/core/networking/firebase_collections.dart';
+import 'package:medical_app/core/services/appwrite_service.dart';
+import 'package:medical_app/core/utils/get_user_data.dart';
 import 'package:medical_app/features/auth/data/datasources/remote_data_source/base_auth_remote_datasource.dart';
+import 'package:medical_app/features/auth/data/models/complete_data_request_model.dart';
 import 'package:medical_app/features/auth/data/models/login_request_model.dart';
 import 'package:medical_app/features/auth/data/models/signup_request_model.dart';
 import 'package:medical_app/features/auth/data/models/user_model.dart';
@@ -17,6 +25,8 @@ class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
   Future<UserModel> signUpWithEmailPassword(
       SignupRequestModel signupRequestModel) async {
     try {
+      String? image = await AppwriteStorageService.uploadImage(
+          signupRequestModel.profileImage!);
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: signupRequestModel.email!,
@@ -26,6 +36,7 @@ class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
         signupRequestModel,
         credential.user!,
       );
+      userModel.image = image!;
       await saveUserData(userModel);
       return userModel;
     } on FirebaseAuthException catch (e) {
@@ -35,10 +46,13 @@ class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
         throw CustomFirebaseAuthException(
             'The account already exists for that email.');
       } else {
+        log(e.toString());
         throw CustomFirebaseAuthException(
             'An Error Occured, Please Try Again Later');
       }
     } catch (e) {
+      log(e.toString());
+
       throw CustomFirebaseAuthException(
           'An Error Occured, Please Try Again Later');
     }
@@ -72,7 +86,6 @@ class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
       // ignore: curly_braces_in_flow_control_structures
       throw CustomFirebaseAuthException('Unable to retrieve user');
     final userModel = UserModel.fromFirebaseUser(user, signupRequestModel);
-
     await saveUserData(userModel);
     final doc = await readUser(userModel.uId!);
     userModel.isCompeleteData = doc['isCompeleteData'] ?? false;
@@ -138,7 +151,7 @@ class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
 
       final userModel = UserModel.fromFirebaseJson(
         doc.data() as Map<String, dynamic>,
-        credential.user!,
+        credential.user!.uid,
       );
       return userModel;
     } on FirebaseAuthException catch (e) {
@@ -178,7 +191,7 @@ class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
       throw CustomFirebaseAuthException('This user is not registered');
     }
 
-    final userModel = UserModel.fromFirebaseJson(doc.data()!, user);
+    final userModel = UserModel.fromFirebaseJson(doc.data()!, user.uid);
     return userModel;
   }
 
@@ -202,8 +215,29 @@ class FirebaseAuthRemoteDatasource extends BaseAuthRemoteDataSource {
     }
     final userModel = UserModel.fromFirebaseJson(
       doc.data() as Map<String, dynamic>,
-      userCredential.user!,
+      userCredential.user!.uid,
     );
     return userModel;
+  }
+
+  Future<String?> uploadImageToStorage(XFile image) async {
+    final file = File(image.path);
+    final storageRef = FirebaseStorage.instance
+        .ref()
+        .child('uploads/${DateTime.now().millisecondsSinceEpoch}.jpg');
+    await storageRef.putFile(file);
+    final downloadUrl = await storageRef.getDownloadURL();
+    return downloadUrl;
+  }
+
+  @override
+  Future<UserModel> completeData(CompleteDataRequestModel request) async {
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollections.users)
+        .doc(GetUserData.user!.uId)
+        .update(request.toJson());
+    final doc = await readUser(GetUserData.user!.uId!);
+    return UserModel.fromFirebaseJson(
+        doc.data() as Map<String, dynamic>, GetUserData.user!.uId!);
   }
 }

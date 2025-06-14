@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/theme/app_styles.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
+import 'package:medical_app/core/utils/get_user_data.dart';
 import 'package:medical_app/core/widgets/custom_app_bar.dart';
 import 'package:medical_app/features/doctor_home/presentation/view/widgets/fetch_consaltant_bloc_builder.dart';
 import 'package:medical_app/features/doctor_profile/presentation/view/widgets/doctor_profile_info_section.dart';
@@ -23,10 +24,9 @@ class DoctorProfileViewBody extends StatelessWidget {
         SliverToBoxAdapter(child: SizedBox(height: 27)),
         SliverToBoxAdapter(
           child: IamgeNameGmailSection(
-            imageUrl:
-                'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
-            name: 'Dr. John Doe',
-            gmail: 'JohnDoe6o@gmail.com',
+            imageUrl: GetUserData.user!.image,
+            name: GetUserData.user!.name!,
+            gmail: GetUserData.user!.email!,
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 30)),

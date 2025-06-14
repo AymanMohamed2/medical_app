@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:medical_app/core/enums/consultant_status_enum.dart';
 
 class BaseDoctorsConsaltantModel {
@@ -52,20 +55,53 @@ class DoctorConsaltantModel {
     required this.patientImage,
     required this.patientName,
   });
+  static DateTime parseToDateTime(dynamic value) {
+    if (value is Timestamp) {
+      return value.toDate();
+    } else if (value is String) {
+      try {
+        return DateTime.parse(value);
+      } catch (_) {
+        try {
+          return DateFormat('yyyy/MM/dd').parse(value);
+        } catch (e) {
+          throw Exception('فشل تحويل التاريخ: $value');
+        }
+      }
+    } else if (value is DateTime) {
+      log(value.toString());
+      return value;
+    } else {
+      log(value.toString());
+
+      throw Exception('نوع تاريخ غير مدعوم: $value');
+    }
+  }
+
+  static String formatTimeFromTimestamp(dynamic value) {
+    if (value is Timestamp) {
+      final dateTime = value.toDate();
+      return DateFormat.jm().format(dateTime); // ⏰ زي: 7:15 PM
+    } else if (value is DateTime) {
+      return DateFormat.jm().format(value);
+    } else {
+      throw Exception('Invalid time format: $value');
+    }
+  }
 
   factory DoctorConsaltantModel.fromQuerySnapshot(
           Map<String, dynamic> data, final String id) =>
       DoctorConsaltantModel(
         status: DeliveryStatusExtension.fromString(data['consultantStatus']),
         doctorId: data['doctorId'],
-        date: (data['date'] as Timestamp).toDate(),
+        date: parseToDateTime(data['date']),
         id: id,
         ecgStatusEnum: data['ecgStatusEnum'],
         medicalCondidion: data['medicalCondidion'],
         patientAge: data['patient_age'],
         patientEmail: data['patient_email'],
         patientImage: data['patient_image'],
-        time: data['time'],
+        time: formatTimeFromTimestamp(data['time']),
         meetingLink: data['meetingLink'],
         patientName: data['patient_name'],
         meetingTime: data['meetingTime'],

@@ -19,6 +19,7 @@ class FetchConsaltantBlocBuilder extends StatelessWidget {
         if (state is FetchConsaltantsSuccess) {
           if (state.baseDoctorsConsaltantModel.consaltants.isEmpty) {
             return SliverFillRemaining(
+                hasScrollBody: false,
                 child: Align(
                     child: const Center(child: Text('No Reservations yet'))));
           } else {
@@ -31,10 +32,12 @@ class FetchConsaltantBlocBuilder extends StatelessWidget {
           }
         } else if (state is FetchConsaltantsFailure) {
           return SliverFillRemaining(
+              hasScrollBody: false,
               child:
                   Align(child: Center(child: Text(state.failure.errMessage))));
         } else {
           return SliverFillRemaining(
+              hasScrollBody: false,
               child: Align(
                   child: const Center(child: CircularProgressIndicator())));
         }

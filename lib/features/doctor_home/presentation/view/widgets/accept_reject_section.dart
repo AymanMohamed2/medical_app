@@ -60,6 +60,10 @@ class AcceptRejectSection extends StatelessWidget {
                 context
                     .read<ResponseConsaltantCubit>()
                     .setStatus(ConsultantStatusEnum.rejected);
+                context
+                    .read<ResponseConsaltantCubit>()
+                    .setSelectedDate(DateTime.now());
+                context.read<ResponseConsaltantCubit>().responseConsaltant();
               },
             ),
           )
