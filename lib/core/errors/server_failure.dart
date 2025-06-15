@@ -5,19 +5,22 @@ import 'package:medical_app/core/errors/faliure.dart';
 import 'package:medical_app/core/utils/lottie_assets.dart';
 
 class ServerFailure extends Failure {
-  ServerFailure(
-      {required super.errMessage, super.lottieAnimation, super.repeat});
+  ServerFailure({
+    required super.errMessage,
+    super.lottieAnimation,
+    super.repeat,
+  });
 
   factory ServerFailure.fromDioException(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
-        return ServerFailure(errMessage: 'انتهت مهلة الاتصال');
+        return ServerFailure(errMessage: 'Connection timeout.');
 
       case DioExceptionType.sendTimeout:
-        return ServerFailure(errMessage: 'انتهت مهلة الإرسال إلى الخادم');
+        return ServerFailure(errMessage: 'Send timeout to the server.');
 
       case DioExceptionType.receiveTimeout:
-        return ServerFailure(errMessage: 'انتهت مهلة الاستلام من الخادم');
+        return ServerFailure(errMessage: 'Receive timeout from the server.');
 
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
@@ -25,13 +28,15 @@ class ServerFailure extends Failure {
 
       case DioExceptionType.connectionError:
         return ServerFailure(
-            repeat: true,
-            errMessage: 'لا يوجد اتصال بالإنترنت',
-            lottieAnimation: LottieAssets.noInternet);
+          repeat: true,
+          errMessage: 'No internet connection.',
+          lottieAnimation: LottieAssets.noInternet,
+        );
 
       default:
         return ServerFailure(
-            errMessage: 'عذرًا، حدث خطأ. يرجى المحاولة مرة أخرى.');
+          errMessage: 'Sorry, an error occurred. Please try again.',
+        );
     }
   }
 
@@ -41,37 +46,35 @@ class ServerFailure extends Failure {
       case 401:
       case 403:
         return ServerFailure(
-            errMessage: json['message'] ?? 'حدث خطأ. يرجى المحاولة مرة أخري');
+            errMessage:
+                json['message'] ?? 'An error occurred. Please try again.');
 
       case 404:
         return ServerFailure(
-            errMessage: 'لم يتم العثور على طلبك. يرجى المحاولة مرة أخرى.');
+            errMessage: 'Request not found. Please try again.');
 
       case 408:
-        return ServerFailure(
-            errMessage: 'انتهت مهلة الطلب. يرجى المحاولة مرة أخرى.');
+        return ServerFailure(errMessage: 'Request timeout. Please try again.');
 
       case 429:
         return ServerFailure(
-            errMessage: 'عدد الطلبات كبير جدًا. يرجى التخفيف.');
+            errMessage: 'Too many requests. Please slow down.');
 
       case 500:
-        log(json.toString());
         return ServerFailure(
-            errMessage: 'خطأ داخلي في الخادم. يرجى المحاولة مرة أخرى.');
+            errMessage: 'Internal server error. Please try again.');
 
       case 502:
         return ServerFailure(
-            errMessage: 'بوابة سيئة. يرجى المحاولة مرة أخرى لاحقًا.');
+            errMessage: 'Bad gateway. Please try again later.');
 
       case 503:
         return ServerFailure(
-            errMessage: 'النظام غير متاح. يرجى المحاولة مرة أخرى لاحقًا.');
+            errMessage: 'Service unavailable. Please try again later.');
 
       default:
-        log(json.toString());
         return ServerFailure(
-            errMessage: 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.');
+            errMessage: 'Unexpected error occurred. Please try again.');
     }
   }
 }

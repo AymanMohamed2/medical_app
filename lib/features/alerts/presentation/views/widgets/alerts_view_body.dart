@@ -13,6 +13,7 @@ class AlertsViewBody extends StatelessWidget {
     return Column(
       children: [
         CustomAppBar(
+          isBackButtonVisible: false,
           title: AppStrings.appBarAlerts,
           onPressed: () {},
         ),

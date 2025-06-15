@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:medical_app/core/theme/app_colors.dart';
 
 class CustomWeekHourPicker extends StatefulWidget {
-  final void Function({required int selectedDay, required int selectedHour})
-      onChange;
+  final void Function({
+    required int selectedDayNumber, // 1 to 7
+    required int selectedHour,
+  }) onChange;
+
   final Color? selectedColor;
   final Color? unselectedColor;
   final Color? sliderColor;
@@ -26,27 +28,49 @@ class CustomWeekHourPicker extends StatefulWidget {
 }
 
 class _CustomWeekHourPickerState extends State<CustomWeekHourPicker> {
-  late List<DateTime> currentWeek;
-  late DateTime selectedDate;
+  late int selectedDayIndex; // 0 (Saturday) to 6 (Friday)
   late int selectedHour;
+
+  final List<String> dayLetters = ['Sa', 'Su', 'M', 'T', 'W', 'Th', 'F'];
 
   @override
   void initState() {
     super.initState();
-    _generateWeek();
-    selectedDate = DateTime.now();
-    selectedHour = DateTime.now().hour;
+    final now = DateTime.now();
+    selectedHour = now.hour;
+
+    switch (now.weekday) {
+      case DateTime.saturday:
+        selectedDayIndex = 0;
+        break;
+      case DateTime.sunday:
+        selectedDayIndex = 1;
+        break;
+      case DateTime.monday:
+        selectedDayIndex = 2;
+        break;
+      case DateTime.tuesday:
+        selectedDayIndex = 3;
+        break;
+      case DateTime.wednesday:
+        selectedDayIndex = 4;
+        break;
+      case DateTime.thursday:
+        selectedDayIndex = 5;
+        break;
+      case DateTime.friday:
+        selectedDayIndex = 6;
+        break;
+      default:
+        selectedDayIndex = 0;
+    }
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.onChange(
-          selectedDay: selectedDate.day, selectedHour: selectedHour);
+        selectedDayNumber: selectedDayIndex + 1,
+        selectedHour: selectedHour,
+      );
     });
-  }
-
-  void _generateWeek() {
-    final now = DateTime.now();
-    final startOfWeek = now.subtract(Duration(days: now.weekday % 7));
-    currentWeek =
-        List.generate(7, (index) => startOfWeek.add(Duration(days: index)));
   }
 
   @override
@@ -70,22 +94,26 @@ class _CustomWeekHourPickerState extends State<CustomWeekHourPicker> {
               height: 70,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: currentWeek.map((date) {
-                  final isSelected = isSameDate(date, selectedDate);
+                children: List.generate(7, (index) {
+                  final isSelected = index == selectedDayIndex;
+                  final dayLetter = dayLetters[index];
+                  final dayNumber = index + 1;
+
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedDate = date;
+                        selectedDayIndex = index;
                       });
                       widget.onChange(
-                          selectedDay: selectedDate.day,
-                          selectedHour: selectedHour);
+                        selectedDayNumber: dayNumber,
+                        selectedHour: selectedHour,
+                      );
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          DateFormat('E').format(date).substring(0, 1),
+                          dayLetter,
                           style: widget.dayTextStyle?.copyWith(
                                 color: isSelected
                                     ? selectedColor
@@ -99,34 +127,24 @@ class _CustomWeekHourPickerState extends State<CustomWeekHourPicker> {
                               ),
                         ),
                         const SizedBox(height: 4),
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            border: Border.all(
+                        Text(
+                          '$dayNumber',
+                          style: widget.dateTextStyle?.copyWith(
                                 color: isSelected
                                     ? selectedColor
-                                    : Colors.transparent),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            date.day.toString(),
-                            style: widget.dateTextStyle?.copyWith(
-                                  color: isSelected
-                                      ? selectedColor
-                                      : unselectedColor,
-                                ) ??
-                                TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: isSelected
-                                      ? selectedColor
-                                      : unselectedColor,
-                                ),
-                          ),
+                                    : unselectedColor,
+                              ) ??
+                              TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: isSelected
+                                    ? selectedColor
+                                    : unselectedColor,
+                              ),
                         )
                       ],
                     ),
                   );
-                }).toList(),
+                }),
               ),
             ),
           ),
@@ -142,7 +160,7 @@ class _CustomWeekHourPickerState extends State<CustomWeekHourPicker> {
             children: [
               Slider(
                 value: selectedHour.toDouble(),
-                min: 0,
+                min: 1,
                 max: 24,
                 divisions: 24,
                 label: '${selectedHour}h',
@@ -151,8 +169,9 @@ class _CustomWeekHourPickerState extends State<CustomWeekHourPicker> {
                     selectedHour = value.round();
                   });
                   widget.onChange(
-                      selectedDay: selectedDate.day,
-                      selectedHour: selectedHour);
+                    selectedDayNumber: selectedDayIndex + 1,
+                    selectedHour: selectedHour,
+                  );
                 },
               ),
               Row(
@@ -172,9 +191,5 @@ class _CustomWeekHourPickerState extends State<CustomWeekHourPicker> {
         )
       ],
     );
-  }
-
-  bool isSameDate(DateTime a, DateTime b) {
-    return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 }

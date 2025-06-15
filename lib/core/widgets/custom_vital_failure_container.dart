@@ -10,13 +10,14 @@ class CustomVitalFailureContainer extends StatelessWidget {
     this.icon,
     required this.unit,
     this.onPressed,
+    this.isCanReload = true,
   });
   final Color backColor;
   final Color color;
   final void Function()? onPressed;
   final IconData? icon;
   final String unit;
-
+  final bool isCanReload;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -28,8 +29,9 @@ class CustomVitalFailureContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
           child: Center(
-            child:
-                IconButton(onPressed: () {}, icon: Icon(Icons.replay_outlined)),
+            child: IconButton(
+                onPressed: onPressed,
+                icon: isCanReload ? Icon(Icons.replay_outlined) : Text('--')),
           ),
         ),
         Positioned(

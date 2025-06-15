@@ -5,7 +5,6 @@ import 'package:medical_app/core/theme/app_colors.dart';
 import 'package:medical_app/core/utils/app_strings.dart';
 import 'package:medical_app/core/utils/service_locator.dart';
 import 'package:medical_app/features/alerts/presentation/views/alerts_view.dart';
-import 'package:medical_app/features/patient_home/data/models/fetch_vitals_request_model.dart';
 import 'package:medical_app/features/patient_home/data/repository/doctors_repository.dart';
 import 'package:medical_app/features/patient_home/data/repository/ecg_repository.dart';
 import 'package:medical_app/features/patient_home/data/repository/patient_vitals_repository.dart';
@@ -45,15 +44,13 @@ class _PatientBottomNavBarViewState extends State<PatientBottomNavBarView> {
                 FetchDoctorsCubit(getIt.get<DoctorsRepository>())
                   ..fetchDoctors()),
         BlocProvider(
-            create: (context) =>
-                FetchBpmCubit(getIt.get<BpmRepository>())..fetchBpm()),
+            create: (context) => FetchBpmCubit(getIt.get<BpmRepository>())),
         BlocProvider(
             create: (context) => FetchEcgStatusCubit(getIt.get<EcgRepository>())
               ..fetchEcgStatus()),
         BlocProvider(
-            create: (context) => FetchPatientVitalsCubit(
-                getIt.get<PatientVitalsRepository>())
-              ..fetchPatientVitals(FetchVitalsRequestModel(day: 1, hour: 2))),
+            create: (context) =>
+                FetchPatientVitalsCubit(getIt.get<PatientVitalsRepository>())),
         BlocProvider(
             create: (context) =>
                 ConsultDoctorCubit(getIt.get<DoctorsRepository>())),

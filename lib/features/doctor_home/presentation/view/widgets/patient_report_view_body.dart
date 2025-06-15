@@ -14,7 +14,7 @@ import 'package:medical_app/features/patient_home/presentation/view_model/fetch_
 import 'package:medical_app/features/patient_home/presentation/view_model/patient_vitals_cubit/fetch_patient_vitals_cubit.dart';
 import 'package:medical_app/features/patient_profile/presentation/view/widgets/iamge_name_gmail_section.dart';
 
-class PatientReportViewBody extends StatelessWidget {
+class PatientReportViewBody extends StatefulWidget {
   const PatientReportViewBody({
     super.key,
     required this.isVisible,
@@ -24,30 +24,38 @@ class PatientReportViewBody extends StatelessWidget {
   final DoctorConsaltantModel doctorConsaltantModel;
 
   @override
+  State<PatientReportViewBody> createState() => _PatientReportViewBodyState();
+}
+
+class _PatientReportViewBodyState extends State<PatientReportViewBody> {
+  int? day;
+  int? hour;
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           CustomAppBar(
-            model: doctorConsaltantModel,
+            model: widget.doctorConsaltantModel,
             title: AppStrings.patientReport,
             onPressed: () {
               Navigator.pop(context);
             },
-            isVisible: isVisible,
+            isVisible: widget.isVisible,
           ),
           SizedBox(height: 27),
           IamgeNameGmailSection(
-            imageUrl: doctorConsaltantModel.patientImage,
-            name: doctorConsaltantModel.patientName,
-            gmail: doctorConsaltantModel.patientEmail,
+            imageUrl: widget.doctorConsaltantModel.patientImage,
+            name: widget.doctorConsaltantModel.patientName,
+            gmail: widget.doctorConsaltantModel.patientEmail,
           ),
           SizedBox(height: 25),
           ProfileUserInfoSection(
             isDoctor: true,
-            age: doctorConsaltantModel.patientAge,
-            state: doctorConsaltantModel.ecgStatusEnum,
-            medicalRecord: doctorConsaltantModel.medicalCondidion,
+            age: widget.doctorConsaltantModel.patientAge,
+            state: widget.doctorConsaltantModel.ecgStatusEnum,
+            medicalRecord: widget.doctorConsaltantModel.medicalCondidion,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 26, top: 20, bottom: 8),
@@ -65,10 +73,10 @@ class PatientReportViewBody extends StatelessWidget {
             child: CustomWeekHourPicker(
               sliderColor: AppColors.primaryColor,
               selectedColor: AppColors.primaryColor,
-              onChange: ({required selectedDay, required selectedHour}) {
+              onChange: ({required selectedDayNumber, required selectedHour}) {
                 context.read<FetchBpmCubit>().fetchBpm();
                 final request = FetchVitalsRequestModel(
-                    day: selectedDay, hour: selectedHour);
+                    day: selectedDayNumber, hour: selectedHour);
                 context
                     .read<FetchPatientVitalsCubit>()
                     .fetchPatientVitals(request);
@@ -78,7 +86,9 @@ class PatientReportViewBody extends StatelessWidget {
           SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26),
-            child: VitalSignsSection(),
+            child: VitalSignsSection(
+              isCanReload: false,
+            ),
           ),
           SizedBox(height: 15),
           BlocBuilder<FetchPatientVitalsCubit, FetchPatientVitalsState>(
@@ -86,8 +96,11 @@ class PatientReportViewBody extends StatelessWidget {
               if (state is FetchPatientVitalsSuccess) {
                 return ECGTable();
               } else if (state is FetchPatientVitalsFailure) {
-                return Align(
-                    child: Center(child: Text(state.failure.errMessage)));
+                String errMessage = state.failure.errMessage ==
+                        'Internal server error. Please try again.'
+                    ? 'There are no readings available at this time.'
+                    : state.failure.errMessage;
+                return Align(child: Center(child: Text(errMessage)));
               } else {
                 return Align(
                     child: const Center(child: CircularProgressIndicator()));

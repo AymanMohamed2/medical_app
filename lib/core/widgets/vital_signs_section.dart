@@ -3,7 +3,10 @@ import 'package:medical_app/features/patient_home/presentation/view/widgets/othe
 import 'package:medical_app/features/patient_home/presentation/view/widgets/bpm_bloc_builder.dart';
 
 class VitalSignsSection extends StatelessWidget {
-  const VitalSignsSection({super.key});
+  const VitalSignsSection(
+      {super.key, this.day, this.hour, this.isCanReload = true});
+  final int? day, hour;
+  final bool isCanReload;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,13 @@ class VitalSignsSection extends StatelessWidget {
           child: BpmBlocBuilder(),
         ),
         SizedBox(width: 8),
-        Expanded(flex: 2, child: OtherPatientVitalsBlocBuilder()),
+        Expanded(
+            flex: 2,
+            child: OtherPatientVitalsBlocBuilder(
+              day: day,
+              hour: hour,
+              isCanReload: isCanReload,
+            )),
       ],
     );
   }

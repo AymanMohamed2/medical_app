@@ -8,8 +8,13 @@ import 'package:medical_app/features/patient_home/presentation/view_model/patien
 class OtherPatientVitalsBlocBuilder extends StatelessWidget {
   const OtherPatientVitalsBlocBuilder({
     super.key,
+    this.day,
+    this.hour,
+    this.isCanReload = true,
   });
-
+  final int? day;
+  final int? hour;
+  final bool isCanReload;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FetchPatientVitalsCubit, FetchPatientVitalsState>(
@@ -19,7 +24,11 @@ class OtherPatientVitalsBlocBuilder extends StatelessWidget {
             patientVitalsModel: state.basePatientVitalsModel,
           );
         } else if (state is FetchPatientVitalsFailure) {
-          return OtherPatientVitalFailureSection();
+          return OtherPatientVitalFailureSection(
+            isCanReload: isCanReload,
+            day: day,
+            hour: hour,
+          );
         } else {
           return OtherVitalsLoadingSection();
         }

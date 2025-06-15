@@ -47,7 +47,9 @@ class CustomPatientCard extends StatelessWidget {
                 height: 87,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(22),
-                  child: CustomCashedNetworkImage(),
+                  child: CustomCashedNetworkImage(
+                    imageUrl: doctorConsaltantModel.patientImage,
+                  ),
                 ),
               ),
             ),
