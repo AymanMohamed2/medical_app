@@ -15,10 +15,10 @@ class PatientVitalsRepoImpl extends PatientVitalsRepository {
   @override
   Future<Either<Failure, BasePatientVitalsModel>> fetchPatientVitals(
       FetchVitalsRequestModel request) async {
-    final result = await apiService.get(
-        url:
-            '${ApiUrls.patientVitalsUrl}day/${request.day}/hour/${request.hour}');
     try {
+      final result = await apiService.get(
+          url:
+              '${ApiUrls.patientVitalsUrl}day/${request.day}/hour/${request.hour}');
       return right(BasePatientVitalsModel.fromJson(result.data));
     } on DioException catch (e) {
       return left(ServerFailure.fromDioException(e));

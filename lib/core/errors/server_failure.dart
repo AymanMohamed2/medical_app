@@ -56,6 +56,7 @@ class ServerFailure extends Failure {
             errMessage: 'عدد الطلبات كبير جدًا. يرجى التخفيف.');
 
       case 500:
+        log(json.toString());
         return ServerFailure(
             errMessage: 'خطأ داخلي في الخادم. يرجى المحاولة مرة أخرى.');
 
